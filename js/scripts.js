@@ -1,5 +1,7 @@
 var currentLocation = [1,1];
 //first index EW second NS
+
+
 var mapLocation = [
     ["0,0 : Southwest corner of a quiet meadow.", "1,0 : South side of a quiet meadow.", "2,0 : Southeast corner of a quiet meadow."],
     ["0,1 : West side of a quiet meadow.", "1,1 : Dead center of a quiet meadow.", "2,1 : East side of a quiet meadow."],
@@ -14,7 +16,7 @@ var moveLocation = function(direction) {
 
 
 };
-
+var locationVisible
 
 
 
@@ -35,4 +37,6 @@ $(document).ready(function() {
     currentLocation[1] -= 1;
       moveLocation(currentLocation);
   });
+
+  $(".bank")
 });
