@@ -28,3 +28,9 @@ body {
 .navbar {
   background-color: #070202;
 }
+.hidden {
+  display: none;
+}
+.location-bank {
+  display: none;
+}

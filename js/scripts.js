@@ -10,10 +10,19 @@ if (currentLocation > -1 || currentLocation > 4){
 } else {
   currentLocation = false;
 }
-
-
-
+function enviroment(gate, crank, pail){
+  this.gate = gate;
+  this.crank = crank;
+  this.pail = pail;
 };
+function items(key){
+this.key = key;
+  };
+items.prototype.inventory = function(){
+  
+}
+};
+
 
 
 
