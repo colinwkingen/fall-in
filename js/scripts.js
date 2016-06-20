@@ -9,10 +9,10 @@ var mapLocation = [
 
 var moveLocation = function(direction) {
   var currentMapLocation = mapLocation[direction[1]][direction[0]];
-  $("#main_output p").text(currentMapLocation);
+  $("#main_output").text(currentMapLocation);
 
 
-if (currentLocation > -1 || currentLocation > 4){
+if (currentLocation > -1 || currentLocation > 3){
   currentLocation = true;
 } else {
   currentLocation = false;
@@ -29,11 +29,22 @@ function enviroment(gate, crank, pail){
 function items(key){
 this.key = key;
   };
-player.prototype.inventory = function(){
-  if (playerInventory === this.key)
-  retur
-}
-};
+  player.prototype.inventory = function(){
+    if (playerInventory === this.key) {
+      return playerInventory = [this.key];
+    } else {
+      return playerInventory = [];
+    };
+  };
+  enviroment.prototype.interactive = function(){
+    if (this.playerInventory === []){
+      return this.gate = false;
+    } if (this.playerInventory === [this.key]) {
+      return this.gate = true;
+    }
+  }
+
+  };
 
 
 
@@ -56,4 +67,7 @@ $(document).ready(function() {
     currentLocation[1] -= 1;
       moveLocation(currentLocation);
   });
+  $("#0-1").trigger(function(){
+    alert("The gate has Opened, feel free to exit!");
+  })
 });
