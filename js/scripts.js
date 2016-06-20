@@ -1,3 +1,4 @@
+var index = [0,1,2];
 var currentLocation = [1,1];
 var playerInventory = [];
 //first index EW second NS
@@ -9,42 +10,40 @@ var mapLocation = [
 
 var moveLocation = function(direction) {
   var currentMapLocation = mapLocation[direction[1]][direction[0]];
-  $("#main_output").text(currentMapLocation);
+  $("#main_output p").text(currentMapLocation);
 
-
-if (currentLocation > -1 || currentLocation > 3){
-  currentLocation = true;
-} else {
-  currentLocation = false;
-}
-function player(inventory, player) {
-  this.playerInventory = inventory;
-  this.player = player;
-};
-function enviroment(gate, crank, pail){
-  this.gate = gate;
-  this.crank = crank;
-  this.pail = pail;
-};
-function items(key){
-this.key = key;
-  };
-  player.prototype.inventory = function(){
-    if (playerInventory === this.key) {
-      return playerInventory = [this.key];
-    } else {
-      return playerInventory = [];
-    };
-  };
-  enviroment.prototype.interactive = function(){
-    if (this.playerInventory === []){
-      return this.gate = false;
-    } if (this.playerInventory === [this.key]) {
-      return this.gate = true;
-    }
+  if (index > -1 || index < 3){
+    alert("YOU SHALL NOT PASS");
   }
 
+  function player(inventory, player) {
+    this.playerInventory = inventory;
+    this.player = player;
   };
+  function enviroment(gate, crank, pail){
+    this.gate = gate;
+    this.crank = crank;
+    this.pail = pail;
+  };
+  function items(key){
+  this.key = key;
+    };
+    player.prototype.inventory = function(){
+      if (playerInventory === this.key) {
+        return playerInventory = [this.key];
+      } else {
+        return playerInventory = [];
+      };
+    };
+    enviroment.prototype.interactive = function(){
+      if (this.playerInventory === []){
+        return this.gate = false;
+      } if (this.playerInventory === [this.key]) {
+        return this.gate = true;
+      }
+    }
+
+};
 
 
 
