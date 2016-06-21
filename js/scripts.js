@@ -1,7 +1,4 @@
 
-
-
-
 var currentLocation = [1,1];
 //first index EW second NS
 var mapLocation = [
@@ -27,10 +24,13 @@ function Player() {
   this.itemInventory = [];
   this.hasKey = false;
   this.currentLocation = currentLocation;
-  this.weaponDamage = this.weaponDamage.weaponCheck();
+  this.weaponDamage = this.weaponCheck();
 }
 
-Player.prototype
+Player.prototype.itemsInLocation = function() {
+  var locationItems = mapLocation[currentLocation[0]][currentLocation[1]]
+  return locationItems;
+}
 
 Player.prototype.weaponCheck = function() {
   for (i = 0; i < this.itemInventory.length; i += 1) {
@@ -41,12 +41,11 @@ Player.prototype.weaponCheck = function() {
     } else {
       this.weaponDamage === 1;
     }
-
   }
 }
 
 $(document).ready(function() {
-  var playOne = new Player();
+  var playerOne = new Player();
   $("#button-north").click(function() {
     currentLocation[0] += 1;
     moveLocation(currentLocation);
@@ -63,5 +62,6 @@ $(document).ready(function() {
     currentLocation[1] -= 1;
       moveLocation(currentLocation);
   });
-  $("#interactable").text(mapLocation[currentLocation[0]][currentLocation[1]])
+  visibleLocation(currentLocation);
+  $("#interactable").text(playerOne.itemsInLocation());
 });
