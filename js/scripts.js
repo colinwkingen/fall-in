@@ -20,47 +20,48 @@ var visibleLocation = function(inputLocation) {
 }
 $(document).ready(function() {
   $("#button-north").click(function() {
-    if (arrayOfDirections[currentLocation[0]][currentLocation[1]].north === true) {
+    if (findCoordinate("north")) {
       currentLocation[1] += 1;
       visibleLocation(currentLocation);
     } else {
-      alert("You Ran Into A Wall")
+      alert("You Ran Into A Wall");
     }
   });
   $("#button-south").click(function() {
-    if (arrayOfDirections[currentLocation[0]][currentLocation[1]].south === true) {
+    if (findCoordinate("south")) {
       currentLocation[1] -= 1;
       visibleLocation(currentLocation);
     } else {
-      console.log(what);
-      alert("You Ran Into A Wall")
+      alert("You Ran Into A Wall");
     }
   });
   $("#button-east").click(function() {
-    if (arrayOfDirections[currentLocation[0]][currentLocation[1]].east === true) {
+    if (findCoordinate("east")) {
       currentLocation[0] += 1;
       visibleLocation(currentLocation);
     } else {
-      alert("You Ran Into A Wall")
+      alert("You Ran Into A Wall");
     }
   });
   $("#button-west").click(function() {
-    if (arrayOfDirections[currentLocation[0]][currentLocation[1]].west === true) {
+    if (findCoordinate("west")) {
       currentLocation[0] -= 1;
+      debugger;
       visibleLocation(currentLocation);
     } else {
-      alert("You Ran Into A Wall")
+      alert("You Ran Into A Wall");
     }
   });
 });
 
-function Directions(north, south, east, west) {
+function Directions(north, south, east, west,item) {
   this.north = north;
   this.south = south;
   this.east = east;
   this.west = west;
+  this.item = item;
 }
-var Forest = new Directions(false,false,true,false) //0,0 Forest
+var Forest = new Directions(false,false,true,false,"sword") //0,0 Forest
 var Gate = new Directions(false,false,true,true)  //1,0 Gate
 var Cave = new Directions(true,false,false,true)  //2,0 Cave
 var ArchedRoom = new Directions(true,true,false,true) //2,1 ArchedRoom
@@ -73,4 +74,24 @@ var Coffin = new Directions(false,true,false,false) //2,2 Coffin
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
 ]
-console.log(arrayOfDirections[1][0].north)
+// arrayOfDirections.prototype.findDirection = function (direction) {
+//   return this[currentLocation[0]][currentLocation[1]].direction
+// };
+
+findCoordinate = function(argument)  {
+  var x = currentLocation[0];
+  var y = currentLocation[1];
+  debugger;
+  if (argument === "west") {
+    return arrayOfDirections[x][y].west;
+  } else if (argument === "east") {
+    return arrayOfDirections[x][y].east;
+  } else if (argument === "north") {
+    return arrayOfDirections[x][y].north;
+  } else if (argument === "south") {
+    return arrayOfDirections[x][y].south;
+  } else if (argument === "item") {
+    debugger;
+    return arrayOfDirections[x][y].item;
+  }
+}
