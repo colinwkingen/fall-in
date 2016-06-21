@@ -37,7 +37,7 @@ Player.prototype.weaponCheck = function() {
 $(document).ready(function() {
   var playerOne = new Player();
   $("#button-north").click(function() {
-    if (arrayOfDirections[currentLocation[0]][currentLocation[1]].north === true) {
+    if (findCoordinate("north")) {
       currentLocation[1] += 1;
       visibleLocation(currentLocation);
     } else {
@@ -45,7 +45,7 @@ $(document).ready(function() {
     }
   });
   $("#button-south").click(function() {
-    if (arrayOfDirections[currentLocation[0]][currentLocation[1]].south === true) {
+    if (findCoordinate("south")) {
       currentLocation[1] -= 1;
       visibleLocation(currentLocation);
     } else {
@@ -53,7 +53,7 @@ $(document).ready(function() {
     }
   });
   $("#button-east").click(function() {
-    if (arrayOfDirections[currentLocation[0]][currentLocation[1]].east === true) {
+    if (findCoordinate("east")) {
       currentLocation[0] += 1;
       visibleLocation(currentLocation);
     } else {
@@ -61,8 +61,9 @@ $(document).ready(function() {
     }
   });
   $("#button-west").click(function() {
-    if (arrayOfDirections[currentLocation[0]][currentLocation[1]].west === true) {
+    if (findCoordinate("west")) {
       currentLocation[0] -= 1;
+      debugger;
       visibleLocation(currentLocation);
     } else {
       alert("You Ran Into A Wall");
@@ -70,9 +71,9 @@ $(document).ready(function() {
   });
   $("#button-interact").click(function() {
     if (arrayOfDirections[currentLocation[0]][currentLocation[1]].items.length > 0) {
-      playerOne.itemInventory.push(arrayOfDirections[currentLocation[0]][currentLocation[1]].items[0]);
+      playerOne.itemInventory.push(findCoordinate("items"));
       arrayOfDirections[currentLocation[0]][currentLocation[1]].items.shift(0,1);
-      $("#interactable").text(arrayOfDirections[currentLocation[0]][currentLocation[1]].items);
+      $("#interactable").text(findCoordinate("items"));
       $("#inventory").html("");
       for (i = 0; i < playerOne.itemInventory.length; i += 1) {
         $("#inventory").append("<li>" + playerOne.itemInventory[i] + "</li>");
@@ -102,3 +103,20 @@ var Coffin = new Directions(false,true,false,false,["Knife"]); //2,2 Coffin
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
 ];
+
+findCoordinate = function(argument)  {
+  var x = currentLocation[0];
+  var y = currentLocation[1];
+  if (argument === "west") {
+    return arrayOfDirections[x][y].west;
+  } else if (argument === "east") {
+    return arrayOfDirections[x][y].east;
+  } else if (argument === "north") {
+    return arrayOfDirections[x][y].north;
+  } else if (argument === "south") {
+    return arrayOfDirections[x][y].south;
+  } else if (argument === "items") {
+    debugger;
+    return arrayOfDirections[x][y].items;
+  }
+}
