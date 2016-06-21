@@ -1,23 +1,12 @@
 
 var currentLocation = [0,0];
-//first index EW second NS
-// var mapLocation = [
-//
-//     [["0,0"], ["1,0"], ["2,0", "Stick" ]],
-//     [["0,1"], ["1,1"], ["2,1"]],
-//     [["0,2"], ["1,2", "Key"], ["2,2", "Knife"]],
-//
-// ];
 
-// var moveLocation = function(direction) {
-//   var currentMapLocation = mapLocation[direction[1]][direction[0]];
-//   $("#main_output p").text(currentMapLocation);
-// }
 var visibleLocation = function(inputLocation) {
   $(".location").hide();
   var locationId = "#" + inputLocation[0].toString() + "-" + inputLocation[1].toString();
   $(locationId).show();
   $("#interactable").text(arrayOfDirections[currentLocation[0]][currentLocation[1]].items);
+  $("#inventory").text(this.itemInventory);
 }
 
 function Player() {
@@ -79,6 +68,18 @@ $(document).ready(function() {
       alert("You Ran Into A Wall");
     }
   });
+  $("#button-interact").click(function() {
+    if (arrayOfDirections[currentLocation[0]][currentLocation[1]].items.length > 0) {
+      playerOne.itemInventory.push(arrayOfDirections[currentLocation[0]][currentLocation[1]].items[0]);
+      arrayOfDirections[currentLocation[0]][currentLocation[1]].items.shift(0,1);
+      $("#interactable").text(arrayOfDirections[currentLocation[0]][currentLocation[1]].items);
+      for (i = 0; i < playerOne.itemInventory.length; i += 1) {
+        $("#inventory").append("<li>" + playerOne.itemInventory[i] + "</li>");
+      }
+    } else {
+      alert("There is nothing here to pick up.")
+    }
+  });
 });
 function Directions(north, south, east, west, items) {
   this.north = north;
@@ -87,15 +88,15 @@ function Directions(north, south, east, west, items) {
   this.west = west;
   this.items = items;
 }
-var Forest = new Directions(false,false,true,false,["Knife"]); //0,0 Forest
+var Forest = new Directions(false,false,true,false,[" "]); //0,0 Forest
 var Gate = new Directions(false,false,true,true,[" "]); //1,0 Gate
-var Cave = new Directions(true,false,false,true,[" "]);  //2,0 Cave
+var Cave = new Directions(true,false,false,true,["Stick"]);  //2,0 Cave
 var ArchedRoom = new Directions(true,true,false,true,[" "]); //2,1 ArchedRoom
 var GreatRoom = new Directions(true,false,true,true,[" "]);  //1,1 GreatRoom
 var StairDown = new Directions(true,false, true,false,[" "]); //0,1 StairDown
 var Celler = new Directions(false,true,false,false,[" "]); //0,2 Celler
-var Well = new Directions(false,true,false,false,[" "]); //1,2 Well
-var Coffin = new Directions(false,true,false,false,[" "]); //2,2 Coffin
+var Well = new Directions(false,true,false,false,["Key"]); //1,2 Well
+var Coffin = new Directions(false,true,false,false,["Knife"]); //2,2 Coffin
 
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
