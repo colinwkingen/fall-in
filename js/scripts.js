@@ -70,11 +70,15 @@ $(document).ready(function() {
     }
   });
   $("#button-interact").click(function() {
+    var items = findCoordinate("items")
+    alert(items);
+    debugger;
     if (arrayOfDirections[currentLocation[0]][currentLocation[1]].items.length > 0) {
-      playerOne.itemInventory.push(findCoordinate("items"));
+      playerOne.itemInventory.push(items);
       arrayOfDirections[currentLocation[0]][currentLocation[1]].items.shift(0,1);
-      $("#interactable").text(findCoordinate("items"));
+      $("#interactable").text(items);
       $("#inventory").html("");
+      alert(playerOne.itemInventory);
       for (i = 0; i < playerOne.itemInventory.length; i += 1) {
         $("#inventory").append("<li>" + playerOne.itemInventory[i] + "</li>");
       }
@@ -116,7 +120,6 @@ findCoordinate = function(argument)  {
   } else if (argument === "south") {
     return arrayOfDirections[x][y].south;
   } else if (argument === "items") {
-    debugger;
     return arrayOfDirections[x][y].items;
   }
 }
