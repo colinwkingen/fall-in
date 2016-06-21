@@ -12,14 +12,12 @@ var mapLocation = [
 var moveLocation = function(direction) {
   var currentMapLocation = mapLocation[direction[1]][direction[0]];
   $("#main_output p").text(currentMapLocation);
-
-
-
-};
-var locationVisible
-
-
-
+}
+var visibleLocation = function(inputLocation) {
+  $(".location").hide();
+  var locationId = "#" + inputLocation[0].toString() + "-" + inputLocation[1].toString();
+  $(locationId).show();
+}
 $(document).ready(function() {
   $("#button-north").click(function() {
     currentLocation[0] += 1;
@@ -37,6 +35,4 @@ $(document).ready(function() {
     currentLocation[1] -= 1;
       moveLocation(currentLocation);
   });
-
-  $(".bank")
 });
