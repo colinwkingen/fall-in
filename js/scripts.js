@@ -1,22 +1,23 @@
 
 var currentLocation = [0,0];
 //first index EW second NS
-var mapLocation = [
+// var mapLocation = [
+//
+//     [["0,0"], ["1,0"], ["2,0", "Stick" ]],
+//     [["0,1"], ["1,1"], ["2,1"]],
+//     [["0,2"], ["1,2", "Key"], ["2,2", "Knife"]],
+//
+// ];
 
-    [["0,0"], ["1,0"], ["2,0", "Stick" ]],
-    [["0,1"], ["1,1"], ["2,1"]],
-    [["0,2"], ["1,2", "Key"], ["2,2", "Knife"]],
-
-];
-
-var moveLocation = function(direction) {
-  var currentMapLocation = mapLocation[direction[1]][direction[0]];
-  $("#main_output p").text(currentMapLocation);
-}
+// var moveLocation = function(direction) {
+//   var currentMapLocation = mapLocation[direction[1]][direction[0]];
+//   $("#main_output p").text(currentMapLocation);
+// }
 var visibleLocation = function(inputLocation) {
   $(".location").hide();
   var locationId = "#" + inputLocation[0].toString() + "-" + inputLocation[1].toString();
   $(locationId).show();
+  $("#interactable").text(arrayOfDirections[currentLocation[0]][currentLocation[1]].items);
 }
 
 function Player() {
@@ -28,7 +29,7 @@ function Player() {
 }
 
 Player.prototype.itemsInLocation = function() {
-  var locationItems = mapLocation[currentLocation[0]][currentLocation[1]]
+  var locationItems = mapLocation[currentLocation[0]][currentLocation[1]];
   return locationItems;
 }
 
@@ -51,7 +52,7 @@ $(document).ready(function() {
       currentLocation[1] += 1;
       visibleLocation(currentLocation);
     } else {
-      alert("You Ran Into A Wall")
+      alert("You Ran Into A Wall");
     }
   });
   $("#button-south").click(function() {
@@ -59,8 +60,7 @@ $(document).ready(function() {
       currentLocation[1] -= 1;
       visibleLocation(currentLocation);
     } else {
-      console.log(what);
-      alert("You Ran Into A Wall")
+      alert("You Ran Into A Wall");
     }
   });
   $("#button-east").click(function() {
@@ -68,7 +68,7 @@ $(document).ready(function() {
       currentLocation[0] += 1;
       visibleLocation(currentLocation);
     } else {
-      alert("You Ran Into A Wall")
+      alert("You Ran Into A Wall");
     }
   });
   $("#button-west").click(function() {
@@ -76,30 +76,27 @@ $(document).ready(function() {
       currentLocation[0] -= 1;
       visibleLocation(currentLocation);
     } else {
-      alert("You Ran Into A Wall")
+      alert("You Ran Into A Wall");
     }
   });
-  visibleLocation(currentLocation);
-  $("#interactable").text(playerOne.itemsInLocation());
 });
-
-function Directions(north, south, east, west) {
+function Directions(north, south, east, west, items) {
   this.north = north;
   this.south = south;
   this.east = east;
   this.west = west;
+  this.items = items;
 }
-var Forest = new Directions(false,false,true,false) //0,0 Forest
-var Gate = new Directions(false,false,true,true)  //1,0 Gate
-var Cave = new Directions(true,false,false,true)  //2,0 Cave
-var ArchedRoom = new Directions(true,true,false,true) //2,1 ArchedRoom
-var GreatRoom = new Directions(true,false,true,true)  //1,1 GreatRoom
-var StairDown = new Directions(true,false, true,false) //0,1 StairDown
-var Celler = new Directions(false,true,false,false) //0,2 Celler
-var Well = new Directions(false,true,false,false) //1,2 Well
-var Coffin = new Directions(false,true,false,false) //2,2 Coffin
+var Forest = new Directions(false,false,true,false,["Knife"]); //0,0 Forest
+var Gate = new Directions(false,false,true,true,[" "]); //1,0 Gate
+var Cave = new Directions(true,false,false,true,[" "]);  //2,0 Cave
+var ArchedRoom = new Directions(true,true,false,true,[" "]); //2,1 ArchedRoom
+var GreatRoom = new Directions(true,false,true,true,[" "]);  //1,1 GreatRoom
+var StairDown = new Directions(true,false, true,false,[" "]); //0,1 StairDown
+var Celler = new Directions(false,true,false,false,[" "]); //0,2 Celler
+var Well = new Directions(false,true,false,false,[" "]); //1,2 Well
+var Coffin = new Directions(false,true,false,false,[" "]); //2,2 Coffin
 
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
-]
-console.log(arrayOfDirections[1][0].north)
+];
