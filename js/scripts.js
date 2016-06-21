@@ -22,13 +22,15 @@ var visibleLocation = function(inputLocation) {
   $(locationId).show();
 }
 
-function Player(currentLocation) {
+function Player() {
   this.hitPoints = 10;
   this.itemInventory = [];
   this.hasKey = false;
   this.currentLocation = currentLocation;
   this.weaponDamage = this.weaponDamage.weaponCheck();
 }
+
+Player.prototype
 
 Player.prototype.weaponCheck = function() {
   for (i = 0; i < this.itemInventory.length; i += 1) {
@@ -44,6 +46,7 @@ Player.prototype.weaponCheck = function() {
 }
 
 $(document).ready(function() {
+  var playOne = new Player();
   $("#button-north").click(function() {
     currentLocation[0] += 1;
     moveLocation(currentLocation);
@@ -60,4 +63,5 @@ $(document).ready(function() {
     currentLocation[1] -= 1;
       moveLocation(currentLocation);
   });
+  $("#interactable").text(mapLocation[currentLocation[0]][currentLocation[1]])
 });
