@@ -9,7 +9,7 @@ body {
   text-align: center;
 }
 #main_output p {
-  font-size: 4em;
+  font-size: 2.5em;
 }
 .main_window {
   width: 90%;
@@ -28,6 +28,6 @@ body {
 .navbar {
   background-color: #070202;
 }
-.hidden {
+.notHidden {
   display: none;
 }
