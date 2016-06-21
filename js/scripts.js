@@ -1,11 +1,14 @@
+
+
+
+
 var currentLocation = [1,1];
 //first index EW second NS
-
-
 var mapLocation = [
-    ["0,0 : Southwest corner of a quiet meadow.", "1,0 : South side of a quiet meadow.", "2,0 : Southeast corner of a quiet meadow."],
-    ["0,1 : West side of a quiet meadow.", "1,1 : Dead center of a quiet meadow.", "2,1 : East side of a quiet meadow."],
-    ["0,2 : Northwest corner of a quiet meadow.", "1,2 : North side of a quiet meadow.", "2,2 : Northeast corner of a quiet meadow."],
+
+    [["0,0"], ["1,0"], ["2,0", "Stick" ]],
+    [["0,1"], ["1,1"], ["2,1"]],
+    [["0,2"], ["1,2", "Key"], ["2,2", "Knife"]],
 
 ];
 
@@ -18,6 +21,28 @@ var visibleLocation = function(inputLocation) {
   var locationId = "#" + inputLocation[0].toString() + "-" + inputLocation[1].toString();
   $(locationId).show();
 }
+
+function Player(currentLocation) {
+  this.hitPoints = 10;
+  this.itemInventory = [];
+  this.hasKey = false;
+  this.currentLocation = currentLocation;
+  this.weaponDamage = this.weaponDamage.weaponCheck();
+}
+
+Player.prototype.weaponCheck = function() {
+  for (i = 0; i < this.itemInventory.length; i += 1) {
+    if (this.itemInventory[i] === "Knife") {
+      this.weaponDamage = 3;
+    } else if (this.itemInventory[i] === "Stick") {
+      this.weaponDamage === 2;
+    } else {
+      this.weaponDamage === 1;
+    }
+
+  }
+}
+
 $(document).ready(function() {
   $("#button-north").click(function() {
     currentLocation[0] += 1;
