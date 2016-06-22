@@ -5,7 +5,7 @@ var visibleLocation = function(inputLocation) {
   $(".location").hide();
   var locationId = "#" + inputLocation[0].toString() + "-" + inputLocation[1].toString();
   $(locationId).show();
-  $("#interactable").text(arrayOfDirections[currentLocation[0]][currentLocation[1]].items);
+  $("#interactable").text(currentRoom.items);
   $("#inventory").text(this.itemInventory);
 }
 
@@ -40,8 +40,9 @@ Player.prototype.weaponCheck = function() {
 
 $(document).ready(function() {
   var playerOne = new Player();
+  $("#interactable").text(currentRoom.items);
   $("#button-north").click(function() {
-    if (findCoordinate("north")) {
+    if (currentRoom.north) {
       currentLocation[1] += 1;
       visibleLocation(currentLocation);
     } else {
@@ -49,7 +50,7 @@ $(document).ready(function() {
     }
   });
   $("#button-south").click(function() {
-    if (findCoordinate("south")) {
+    if (currentRoom.south) {
       currentLocation[1] -= 1;
       visibleLocation(currentLocation);
     } else {
@@ -57,7 +58,7 @@ $(document).ready(function() {
     }
   });
   $("#button-east").click(function() {
-    if (findCoordinate("east")) {
+    if (currentRoom.east) {
       currentLocation[0] += 1;
       visibleLocation(currentLocation);
     } else {
@@ -65,7 +66,7 @@ $(document).ready(function() {
     }
   });
   $("#button-west").click(function() {
-    if (findCoordinate("west")) {
+    if (currentRoom.west) {
       currentLocation[0] -= 1;
       visibleLocation(currentLocation);
     } else {
@@ -74,7 +75,7 @@ $(document).ready(function() {
   });
   $("#button-interact").click(function() {
     if (currentRoom.items.length > 0) {
-      currentRoom.playerOne.itemInventory.push(currentRoom.items[0]);
+      playerOne.itemInventory.push(currentRoom.items[0]);
       currentRoom.items.shift(0,1);
       $("#interactable").text(currentRoom.items);
       $("#inventory").html("");
@@ -93,9 +94,9 @@ function Directions(north, south, east, west, items) {
   this.west = west;
   this.items = items;
 }
-var Forest = new Directions(false,false,true,false,[" "]); //0,0 Forest
+var Forest = new Directions(false,false,true,false,["Stick"]); //0,0 Forest
 var Gate = new Directions(false,false,true,true,[" "]); //1,0 Gate
-var Cave = new Directions(true,false,false,true,["Stick"]);  //2,0 Cave
+var Cave = new Directions(true,false,false,true,[" "]);  //2,0 Cave
 var ArchedRoom = new Directions(true,true,false,true,[" "]); //2,1 ArchedRoom
 var GreatRoom = new Directions(true,false,true,true,[" "]);  //1,1 GreatRoom
 var StairDown = new Directions(true,false, true,false,[" "]); //0,1 StairDown
@@ -108,20 +109,3 @@ var arrayOfDirections = [
 ];
 
 var currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]])
-
-findCoordinate = function(argument)  {
-  var x = currentLocation[0];
-  var y = currentLocation[1];
-  if (argument === "west") {
-    return arrayOfDirections[x][y].west;
-  } else if (argument === "east") {
-    return arrayOfDirections[x][y].east;
-  } else if (argument === "north") {
-    return arrayOfDirections[x][y].north;
-  } else if (argument === "south") {
-    return arrayOfDirections[x][y].south;
-  } else if (argument === "items") {
-    debugger;
-    return arrayOfDirections[x][y].items;
-  }
-}
