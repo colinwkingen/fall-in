@@ -12,16 +12,20 @@ var visibleLocation = function(inputLocation) {
 function Player() {
   this.hitPoints = 10;
   this.itemInventory = [];
-  this.hasKey = false;
+  this.hasKey = this.keyCheck();
   this.currentLocation = currentLocation;
   this.weaponDamage = this.weaponCheck();
 }
 
-Player.prototype.itemsInLocation = function() {
-  var locationItems = mapLocation[currentLocation[0]][currentLocation[1]];
-  return locationItems;
+Player.prototype.keyCheck = function() {
+  for (i = 0; i < this.itemInventory.length; i += 1) {
+    if (this.itemInventory[i] === "Key") {
+      this.hasKey = true;
+    } else {
+      this.hasKey = false;
+    }
+  }
 }
-
 Player.prototype.weaponCheck = function() {
   for (i = 0; i < this.itemInventory.length; i += 1) {
     if (this.itemInventory[i] === "Knife") {
@@ -63,22 +67,17 @@ $(document).ready(function() {
   $("#button-west").click(function() {
     if (findCoordinate("west")) {
       currentLocation[0] -= 1;
-      debugger;
       visibleLocation(currentLocation);
     } else {
       alert("You Ran Into A Wall");
     }
   });
   $("#button-interact").click(function() {
-    var items = findCoordinate("items")
-    alert(items);
-    debugger;
     if (arrayOfDirections[currentLocation[0]][currentLocation[1]].items.length > 0) {
-      playerOne.itemInventory.push(items);
+      playerOne.itemInventory.push(arrayOfDirections[currentLocation[0]][currentLocation[1]].items[0]);
       arrayOfDirections[currentLocation[0]][currentLocation[1]].items.shift(0,1);
-      $("#interactable").text(items);
+      $("#interactable").text(arrayOfDirections[currentLocation[0]][currentLocation[1]].items);
       $("#inventory").html("");
-      alert(playerOne.itemInventory);
       for (i = 0; i < playerOne.itemInventory.length; i += 1) {
         $("#inventory").append("<li>" + playerOne.itemInventory[i] + "</li>");
       }
@@ -108,6 +107,8 @@ var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
 ];
 
+var currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]])
+
 findCoordinate = function(argument)  {
   var x = currentLocation[0];
   var y = currentLocation[1];
@@ -120,6 +121,7 @@ findCoordinate = function(argument)  {
   } else if (argument === "south") {
     return arrayOfDirections[x][y].south;
   } else if (argument === "items") {
+    debugger;
     return arrayOfDirections[x][y].items;
   }
 }
