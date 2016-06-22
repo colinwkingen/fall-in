@@ -5,7 +5,7 @@ var visibleLocation = function(inputLocation) {
   $(".location").hide();
   var locationId = "#" + inputLocation[0].toString() + "-" + inputLocation[1].toString();
   $(locationId).show();
-  $("#interactable").text(currentRoom.items);
+  $("#interactable").html("<li>" + currentRoom.items + "</li>");
   $("#inventory").text(this.itemInventory);
   if (currentRoom.north === false) {
     $("#button-north").hide()
@@ -63,7 +63,7 @@ Player.prototype.weaponCheck = function() {
 }
 
 $(document).ready(function() {
-  $("#interactable").text(currentRoom.items);
+  $("#interactable").html("<li>" + currentRoom.items + "</li>");
   visibleLocation(currentLocation);
   $("#button-north").click(function() {
     if (currentRoom.north) {
@@ -93,7 +93,7 @@ $(document).ready(function() {
     if (currentRoom.items.length > 0) {
       playerOne.itemInventory.push(currentRoom.items[0]);
       currentRoom.items.shift(0,1);
-      $("#interactable").text(currentRoom.items);
+      $("#interactable").html("<li>" + currentRoom.items + "</li>");
       $("#inventory").html("");
       for (i = 0; i < playerOne.itemInventory.length; i += 1) {
         $("#inventory").append("<li>" + playerOne.itemInventory[i] + "</li>");
@@ -107,7 +107,10 @@ $(document).ready(function() {
       currentRoom.items.push(playerOne.itemInventory[0]);
       playerOne.itemInventory.shift();
       $("#inventory").html("<li>" + playerOne.itemInventory + "</li>");
-      visibleLocation(currentLocation);
+      $("#interactable").html("");
+      for (i = 0; i < currentRoom.items.length; i += 1) {
+        $("#interactable").append("<li>" + currentRoom.items[i] + "</li>");
+      }
     } else {
       alert("You have nothing to drop!");
     }
