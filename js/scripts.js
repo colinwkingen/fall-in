@@ -41,20 +41,20 @@ function Player() {
 }
 
 Player.prototype.keyCheck = function() {
-  for (i = 0; i < this.itemInventory.length; i += 1) {
-    if (this.itemInventory[i] === "Key") {
-      this.hasKey = true;
-      alert("you have the key to open the door");
-    } else {
-      this.hasKey = false;
-      alert("you still don't have the key");
-    }
+  if (this.hasKey === true) {
+    alert("you have the key to open the door");
+  } else {
+    alert("you still don't have the key");
   }
 }
 Player.prototype.weaponCheck = function() {
   var haveKnife = false;
+  this.hasKey = false;
+  this.weaponDamage = 1;
   for (i = 0; i < this.itemInventory.length; i += 1) {
-    if (this.itemInventory[i] === "Knife") {
+    if (this.itemInventory[i] === "Key") {
+      this.hasKey = true;
+    } else if (this.itemInventory[i] === "Knife") {
       this.weaponDamage = 3
       haveKnife = true;
     } else if (this.itemInventory[i] === "Stick") {
@@ -75,32 +75,24 @@ $(document).ready(function() {
     if (currentRoom.north) {
       currentLocation[1] += 1;
       visibleLocation(currentLocation);
-    } else {
-      alert("You Ran Into A Wall");
     }
   });
   $("#button-south").click(function() {
     if (currentRoom.south) {
       currentLocation[1] -= 1;
       visibleLocation(currentLocation);
-    } else {
-      alert("You Ran Into A Wall");
     }
   });
   $("#button-east").click(function() {
     if (currentRoom.east) {
       currentLocation[0] += 1;
       visibleLocation(currentLocation);
-    } else {
-      alert("You Ran Into A Wall");
-    }
+    } 
   });
   $("#button-west").click(function() {
     if (currentRoom.west) {
       currentLocation[0] -= 1;
       visibleLocation(currentLocation);
-    } else {
-      alert("You Ran Into A Wall");
     }
   });
   $("#button-interact").click(function() {
