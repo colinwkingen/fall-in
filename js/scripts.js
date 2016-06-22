@@ -56,7 +56,7 @@ Player.prototype.weaponCheck = function() {
       haveKnife = true;
     } else if (this.itemInventory[i] === "Stick") {
       if (haveKnife === false) {
-        this.weaponDamage = 2;
+      this.weaponDamage = 2;
       }
     }
   }
