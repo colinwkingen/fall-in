@@ -38,18 +38,22 @@ function Player() {
 }
 
 Player.prototype.keyCheck = function() {
-  for (i = 0; i < this.itemInventory.length; i += 1) {
-    if (this.itemInventory[i] === "Key") {
-      this.hasKey = true;
-    } else {
-      this.hasKey = false;
-    }
+  if (this.hasKey === true) {
+    alert("you have the key to open the door");
+  } else {
+    alert("you still don't have the key");
   }
 }
 Player.prototype.weaponCheck = function() {
+  var haveKnife = false;
+  this.hasKey = false;
+  this.weaponDamage = 1;
   for (i = 0; i < this.itemInventory.length; i += 1) {
-    if (this.itemInventory[i] === "Knife") {
-      this.weaponDamage = 3;
+    if (this.itemInventory[i] === "Key") {
+      this.hasKey = true;
+    } else if (this.itemInventory[i] === "Knife") {
+      this.weaponDamage = 3
+      haveKnife = true;
     } else if (this.itemInventory[i] === "Stick") {
       this.weaponDamage === 2;
     } else {
