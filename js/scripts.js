@@ -2,6 +2,7 @@
 var currentLocation = [0,0];
 
 var visibleLocation = function(inputLocation) {
+  currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]]);
   $(".location").hide();
   var locationId = "#" + inputLocation[0].toString() + "-" + inputLocation[1].toString();
   $(locationId).show();
@@ -108,4 +109,4 @@ var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
 ];
 
-var currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]])
+var currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]]);
