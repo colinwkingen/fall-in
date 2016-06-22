@@ -55,9 +55,9 @@ Player.prototype.weaponCheck = function() {
       this.weaponDamage = 3
       haveKnife = true;
     } else if (this.itemInventory[i] === "Stick") {
-      this.weaponDamage === 2;
-    } else {
-      this.weaponDamage === 1;
+      if (haveKnife === false) {
+        this.weaponDamage = 2;
+      }
     }
   }
 }
@@ -101,11 +101,13 @@ $(document).ready(function() {
     } else {
       alert("There is nothing here to pick up.");
     }
+    playerOne.weaponCheck();
   });
   $("#button-drop").click(function() {
     if (playerOne.itemInventory.length > 0 ) {
       currentRoom.items.push(playerOne.itemInventory[0]);
       playerOne.itemInventory.shift();
+      playerOne.weaponCheck();
       $("#inventory").html("<li>" + playerOne.itemInventory + "</li>");
       $("#interactable").html("");
       for (i = 0; i < currentRoom.items.length; i += 1) {
@@ -114,6 +116,7 @@ $(document).ready(function() {
     } else {
       alert("You have nothing to drop!");
     }
+    playerOne.weaponCheck();
   });
 });
 function Directions(north, south, east, west, items) {
