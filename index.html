@@ -11,16 +11,19 @@
   </head>
   <div class="container main_window">
     <div class="row">
-      <div class="col-md-3 main_columns">
+      <div class="col-xs-3 main_columns">
         <h1>Left Column</h1>
-        <p></p>
+        <h3>Inventory Items</h3>
+        <ul id="inventory">
+        </ul>
+        <button type="button" class="btn btn-lg" id="button-drop">Drop</button>
       </div>
-      <div class="col-md-6 main_columns" id="main_output">
+      <div class="col-xs-6 main_columns" id="main_output">
         <h1>Center Column</h1>
         <div class="bank">
           <div id="0-0" class="location">
             <p>
-              [0,0] START FORREST You are deep in the forest, far from where you began. The trees are old here, and there is no wind.
+              [0,0] START FOREST You are deep in the forest, far from where you began. The trees are old here, and there is no wind.
               In the light of the setting sun a pit can be seen. It is the only shelter, and passing it will leave you to
               the bitter cold and hungry beasts of the wilderness.
             </p>
@@ -67,7 +70,7 @@
           <div id="0-2" class="location notHidden">
             <p>
               [0,2] CELLER This is a large cellar filled wih wooden barrels and ceramic jars that sit on floor to ceiling rows of shelves.
-              It smells like mildew here, and a few small stagnant puddles are seen on the stone floor.
+                It smells like mildew here, and a few small stagnant puddles are seen on the stone floor.
             </p>
           </div>
           <div id="1-2" class="location notHidden">
@@ -86,12 +89,12 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 main_columns">
+      <div class="col-xs-3 main_columns">
         <h1>Right Column</h1>
 
         <h3>Interactable Items</h3>
         <h4 id="interactable"></h4>
-        <button type="button" class="btn btn-lg" id="button-interact">Interact</button>
+        <button type="button" class="btn btn-lg" id="button-interact">Pick Up</button>
       </div>
       <nav class="navbar navbar-inverse navbar-fixed-bottom">
         <div class="container">
