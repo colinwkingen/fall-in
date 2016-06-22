@@ -1,4 +1,3 @@
-
 var currentLocation = [0,0];
 var playerOne = new Player();
 var visibleLocation = function(inputLocation) {
@@ -8,6 +7,26 @@ var visibleLocation = function(inputLocation) {
   $(locationId).show();
   $("#interactable").text(currentRoom.items);
   $("#inventory").text(this.itemInventory);
+  if (currentRoom.north === false) {
+    $("#button-north").hide()
+  } else {
+    $("#button-north").show()
+  }
+  if (currentRoom.south === false) {
+    $("#button-south").hide()
+  } else {
+    $("#button-south").show()
+  }
+  if (currentRoom.east === false) {
+    $("#button-east").hide()
+  } else {
+    $("#button-east").show()
+  }
+  if (currentRoom.west === false) {
+    $("#button-west").hide()
+  } else {
+    $("#button-west").show()
+  }
 }
 
 function Player() {
@@ -41,6 +60,7 @@ Player.prototype.weaponCheck = function() {
 
 $(document).ready(function() {
   $("#interactable").text(currentRoom.items);
+  visibleLocation(currentLocation);
   $("#button-north").click(function() {
     if (currentRoom.north) {
       currentLocation[1] += 1;
