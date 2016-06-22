@@ -34,3 +34,6 @@ body {
 ul {
   list-style: none;
 }
+.btn:active {
+  color: red;
+}

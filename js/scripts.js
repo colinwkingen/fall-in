@@ -60,6 +60,7 @@ Player.prototype.weaponCheck = function() {
 
 $(document).ready(function() {
   $("#interactable").text(currentRoom.items);
+  visibleLocation(currentLocation);
   $("#button-north").click(function() {
     if (currentRoom.north) {
       currentLocation[1] += 1;
