@@ -2,7 +2,6 @@ var currentLocation = [0,0];
 var playerOne = new Player();
 var visibleLocation = function(inputLocation) {
   currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]]);
-  $(".location").hide();
   var locationId = "#" + inputLocation[0].toString() + "-" + inputLocation[1].toString();
   $(locationId).show();
   $("#interactable").html("<li>" + currentRoom.items + "</li>");
@@ -28,7 +27,6 @@ var visibleLocation = function(inputLocation) {
     $("#button-west").show()
   }
 }
-
 function Player() {
   this.hitPoints = 10;
   this.itemInventory = [];
@@ -36,7 +34,6 @@ function Player() {
   this.currentLocation = currentLocation;
   this.weaponDamage = 1;
 }
-
 Player.prototype.keyCheck = function() {
   if (this.hasKey === true) {
     alert("you have the key to open the door");
@@ -56,7 +53,7 @@ Player.prototype.weaponCheck = function() {
       haveKnife = true;
     } else if (this.itemInventory[i] === "Stick") {
       if (haveKnife === false) {
-      this.weaponDamage = 2;
+        this.weaponDamage = 2;
       }
     }
   }
@@ -101,7 +98,7 @@ $(document).ready(function() {
     } else {
       alert("There is nothing here to pick up.");
     }
-    playerOne.weaponCheck();
+    var itemStatus = playerOne.weaponCheck();
   });
   $("#button-drop").click(function() {
     if (playerOne.itemInventory.length > 0 ) {
@@ -116,7 +113,7 @@ $(document).ready(function() {
     } else {
       alert("You have nothing to drop!");
     }
-    playerOne.weaponCheck();
+    var itemStatus =playerOne.weaponCheck();
   });
 });
 function Directions(north, south, east, west, items) {
