@@ -102,7 +102,7 @@ $(document).ready(function() {
     if (playerOne.itemInventory.length > 0 ) {
       currentRoom.items.push(playerOne.itemInventory[0]);
       playerOne.itemInventory.shift();
-      $("#inventory").text(playerOne.itemInventory);
+      $("#inventory").html("<li>" + playerOne.itemInventory + "</li>");
       visibleLocation(currentLocation);
     } else {
       alert("You have nothing to drop!");
