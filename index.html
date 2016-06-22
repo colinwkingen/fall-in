@@ -12,14 +12,12 @@
   <div class="container main_window">
     <div class="row">
       <div class="col-xs-3 main_columns">
-        <h1>Left Column</h1>
         <h3>Inventory Items</h3>
         <ul id="inventory">
         </ul>
         <button type="button" class="btn btn-lg" id="button-drop">Drop</button>
       </div>
       <div class="col-xs-6 main_columns" id="main_output">
-        <h1>Center Column</h1>
         <div class="bank">
           <div id="0-0" class="location">
             <p>
@@ -56,13 +54,14 @@
               a single slab of stone with a carved wooden throne at the end. Huge fireplaces lie to the north and south,
               filled with long dead embers. A few tattered tapestries remain on the walls, their patterns unrecognizable.
               a small exit with a wooden door lies to the west, and a large set of intricately carved wooden doors lie to the east.
+              A wooden door fitted with a lock lies to the north.
             </p>
           </div>
           <div id="2-1" class="location notHidden">
             <p>
               [2,1] ARCHEDROOM This is a round domed room of carved stone about the length and width of a house, and as high.
               The surfaces are all made of fist sized stones that fit together tightly. The walls are carved
-              with the different phases of the moon. To the south is a door made of wood covered in cryptic
+              with the different phases of the moon. To the north is a door made of wood covered in cryptic
               runes the height of two humans. To the west is a wide archway and short hall lined with long dead
               torches and ending in a door.
             </p>
@@ -70,30 +69,29 @@
           <div id="0-2" class="location notHidden">
             <p>
               [0,2] CELLER This is a large cellar filled wih wooden barrels and ceramic jars that sit on floor to ceiling rows of shelves.
-                It smells like mildew here, and a few small stagnant puddles are seen on the stone floor.
+                It smells like mildew here, and a few small stagnant puddles are seen on the stone floor. The exit lies to the south.
             </p>
           </div>
           <div id="1-2" class="location notHidden">
             <p>
               [1,2] This room is round, about twenty steps in diameter and has a well at the center with a chain pulley and large bucket. The air is very
-              damp here and moisture beads on the walls. Empty hooks for lamps are seen on two sides. The exit doorway lies to the north.
+              damp here and moisture beads on the walls. Empty hooks for lamps are seen on two sides. The exit doorway lies to the south.
             </p>
           </div>
           <div id="2-2" class="location notHidden">
             <p>
               [2,2] COFFIN This is a room with a curved ceiling. It is shaped like a very wide hallway, and has the same stone structure as
-              the outside. A dark stone coffin sits at the southern end on a block of similar stone, carved in complicated patterns.
+              the outside. A dark stone coffin sits at the northern end on a block of similar stone, carved in complicated patterns.
               Piles of mouldering cloth, rusting metal and other materials line the walls. The air here is stale and dense.
-              The exit lies to the north.
+              The exit lies to the south.
             </p>
           </div>
         </div>
       </div>
       <div class="col-xs-3 main_columns">
-        <h1>Right Column</h1>
-
-        <h3>Interactable Items</h3>
-        <h4 id="interactable"></h4>
+        <h3>Room Contents</h3>
+        <ul id="interactable">
+        </ul>
         <button type="button" class="btn btn-lg" id="button-interact">Pick Up</button>
       </div>
       <nav class="navbar navbar-inverse navbar-fixed-bottom">
