@@ -73,10 +73,10 @@ $(document).ready(function() {
     }
   });
   $("#button-interact").click(function() {
-    if (arrayOfDirections[currentLocation[0]][currentLocation[1]].items.length > 0) {
-      playerOne.itemInventory.push(arrayOfDirections[currentLocation[0]][currentLocation[1]].items[0]);
-      arrayOfDirections[currentLocation[0]][currentLocation[1]].items.shift(0,1);
-      $("#interactable").text(arrayOfDirections[currentLocation[0]][currentLocation[1]].items);
+    if (currentRoom.items.length > 0) {
+      currentRoom.playerOne.itemInventory.push(currentRoom.items[0]);
+      currentRoom.items.shift(0,1);
+      $("#interactable").text(currentRoom.items);
       $("#inventory").html("");
       for (i = 0; i < playerOne.itemInventory.length; i += 1) {
         $("#inventory").append("<li>" + playerOne.itemInventory[i] + "</li>");
