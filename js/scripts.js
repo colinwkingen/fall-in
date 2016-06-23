@@ -1,6 +1,5 @@
 var currentLocation = [0,0];
 var playerOne = new Player();
-var currentHP = new currentHP();
 var visibleLocation = function(inputLocation) {
   currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]]);
   if (currentRoom.room === "Gate") {
@@ -36,10 +35,6 @@ var visibleLocation = function(inputLocation) {
     $("#button-west").show()
   }
 }
-var hitPoints = function() {
-  this.hitPoints = 10;
-  this.zombieHitPoints = 5;
-}
 var combat = function() {
   roll = Math.floor((Math.random() * 20) + 1);
   if (roll >= 10) {
@@ -55,10 +50,15 @@ function zombie() {
   this.zombieDamage = 1;
   this.critter = [];
 }
-function currentHP() {
-  Player.currentHP = 10;
-  zombie.currentHP = 5;
+function currentPlayerHP() {
+  this.currentHP = 10;
 }
+function currentZombieHP() {
+  this.currentHP = 5;
+}
+currentPlayerHP = new currentPlayerHP(10);
+currentZombieHP = new currentZombieHP(5);
+
 function Player() {
   this.hitPoints = 10;
   this.itemInventory = [];
@@ -157,9 +157,8 @@ $(document).ready(function() {
     playerOne.weaponCheck();
   });
   $("#button-combat").click(function() {
-    if (Player.currentHP)
-    $("#player-hp").html("<li> Current Hit Points:" + this.hitPoints + "</li>");
-    $("#zombie-hp").html("<li> Current Zombie Hit Points:" + this.zombieHitPoints + "</li>");
+    $("#player-hp").html("<li> Current Hit Points:" + currentPlayerHP.currentHP + "</li>");
+    $("#zombie-hp").html("<li> Current Zombie Hit Points:" + currentZombieHP.currentHP + "</li>");
   })
 });
 function Directions(north, south, east, west, items, room, critter) {
