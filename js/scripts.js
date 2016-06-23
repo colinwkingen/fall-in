@@ -68,33 +68,20 @@ Player.prototype.weaponCheck = function() {
     }
   }
 }
-function comboLock(){
-  this.userInput = "#comboInput";
-  this.comboLock = "666";
-}
-while (this.comboLock === "666") {
-  this.userInput >= "666";
-}
-
-comboLock.prototype.unlock = function(){
-  if (this.comboLock === "666"){
-    return alert("the door is unlocked");
-  }
-  else if (this.comboLock != "666"){
-    return alert("that is not the correct combonation");
-  }
-}
-
 $(document).ready(function(){
   $("#button-unlock").click(function(event) {
-    event.preventDefault();
-    if (this.comboLock === "666"){
-      alert("You've unlocked the door!");
+    var comboLock = parseInt($("#comboInput").val());
+    console.log(comboLock);
+    if (comboLock > 666) {
+      alert("guess lower");
+    } else if (comboLock < 666) {
+      alert("guess higher");
+    } else if (comboLock === 666) {
+      alert("you got it");
+    } else {
+      alert("don't break my game!");
     }
-    // else (this.userInput < this.comboLock)
-    // {
-    //   alert("That is the wrong code!");
-    // }
+    event.preventDefault();
   })
 })
 
