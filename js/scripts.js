@@ -52,6 +52,7 @@ function Player() {
   this.hasKey = false;
   this.currentLocation = currentLocation;
   this.weaponDamage = 1;
+  this.goldCount = 0;
 }
 Player.prototype.weaponCheck = function() {
   weaponMessage = [];
@@ -115,6 +116,11 @@ $(document).ready(function() {
         $("#inventory").append("<li>" + playerOne.itemInventory[i] + "</li>");
         }
       }
+      if (currentRoom.treasure[0] === true && currentRoom.treasure[1] != 0)
+        currentRoom.treasure[0] = false;
+        playerOne.goldCount += currentRoom.treasure[1];
+        alert(playerOne.goldCount)
+        $("#coin-counter").text("You have " + playerOne.goldCount.toString() + " gold coins.");
     } else {
       statusMessage.push("There is nothing here to pick up.");
     }
@@ -134,14 +140,11 @@ $(document).ready(function() {
     }
   });
   $("button").click(function() {
-    $("coin-counter").text(goldInRoom);
     statusMessage.push(visibleLocation(currentLocation));
     var goldInRoom = goldRoller();
     if ( goldInRoom > 0 && currentRoom.treasure[0] === true) {
-      currentRoom.treasure[0] = false;
       currentRoom.treasure[1] = goldInRoom;
       statusMessage.push("There are a few dirty gold coins scattered about the room.");
-      currentRoom.items.push("Coins")
       $("#interactable").append("<li> Gold Coins </li>");
     }
     $("#action-text").html(statusMessage.join(" "));
