@@ -45,13 +45,7 @@ function Player() {
   this.currentLocation = currentLocation;
   this.weaponDamage = 1;
 }
-// Player.prototype.keyCheck = function() {
-//   if (this.hasKey === true) {
-//     alert("you have the key to open the door");
-//   } else {
-//     alert("you still don't have the key");
-//   }
-// }
+
 Player.prototype.weaponCheck = function() {
   weaponMessage = [];
   var haveKnife = false;
@@ -83,31 +77,28 @@ $(document).ready(function() {
   $("#button-north").click(function() {
     if (currentRoom.north) {
       currentLocation[1] += 1;
-      statusMessage.push(visibleLocation(currentLocation));
     }
   });
   $("#button-south").click(function() {
     if (currentRoom.south) {
       currentLocation[1] -= 1;
-      statusMessage.push(visibleLocation(currentLocation));
     }
   });
   $("#button-east").click(function() {
     if (currentRoom.east) {
       currentLocation[0] += 1;
-      statusMessage.push(visibleLocation(currentLocation));
     }
   });
   $("#button-west").click(function() {
     if (currentRoom.west) {
       currentLocation[0] -= 1;
-      statusMessage.push(visibleLocation(currentLocation));
     }
   });
   $("#button-interact").click(function() {
     if (currentRoom.items.length > 0) {
       playerOne.itemInventory.push(currentRoom.items[0]);
       currentRoom.items.shift();
+      statusMessage.push(playerOne.weaponCheck());
       $("#interactable").html("<li>" + currentRoom.items + "</li>");
       $("#inventory").html("");
       for (i = 0; i < playerOne.itemInventory.length; i += 1) {
@@ -121,6 +112,7 @@ $(document).ready(function() {
     if (playerOne.itemInventory.length > 0 ) {
       currentRoom.items.push(playerOne.itemInventory[0]);
       playerOne.itemInventory.shift();
+      statusMessage.push(playerOne.weaponCheck());
       $("#inventory").html("<li>" + playerOne.itemInventory + "</li>");
       $("#interactable").html("");
       for (i = 0; i < currentRoom.items.length; i += 1) {
@@ -131,26 +123,11 @@ $(document).ready(function() {
     }
   });
   $("button").click(function() {
-    statusMessage.push(playerOne.weaponCheck());
+      statusMessage.push(visibleLocation(currentLocation));
     $("#action-text").html(statusMessage.join(" "));
     statusMessage = [];
   });
 });
-
-// var itemStatus = function(room,player,locationCoordinates) {
-//   var statusMessage = [];
-//   if (currentRoom.room === "Gate") {
-//     if (playerOne.hasKey === true) {
-//       statusMessage.push("you shall pass");
-//     } else {
-//       statusMessage.push("go find the key to enter the secret room");
-//     }
-//   }
-//   for (i = 0; i < player.items.length; i++) {
-//     if
-//   }
-// };
-
 function Directions(north, south, east, west, items, room) {
   this.north = north;
   this.south = south;
@@ -172,5 +149,4 @@ var Forest = new Directions(false,false,true,false,["Stick"],"Forest"); //0,0 Fo
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
 ];
-
 var currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]]);
