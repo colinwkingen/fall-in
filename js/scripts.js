@@ -78,6 +78,11 @@ var visibleLocation = function(inputLocation) {
   } else {
     $("#button-multidimention").show();
   }
+  if (currentRoom.room === "Combo") {
+    $("#roomLock").show();
+  } else {
+    $("#roomLock").hide();
+  }
   if (currentRoom.room === "Coffin"){
     $("#combat").show();
   } else {
@@ -140,6 +145,25 @@ Player.prototype.weaponCheck = function() {
   }
   return weaponMessage.join(" ");
 }
+$(document).ready(function(){
+  $("#button-unlock").click(function(event) {
+    var comboLock = parseInt($("#comboInput").val());
+    console.log(comboLock);
+    if (comboLock > 666) {
+      alert("guess lower");
+    } else if (comboLock < 666) {
+      alert("guess higher");
+    } else if (comboLock === 666) {
+      alert("go fight the monster")
+      currentRoom.south = true;
+      currentRoom.west = true;
+    } else {
+      alert("don't break my game!");
+    }
+    event.preventDefault();
+  })
+})
+
 $(document).ready(function() {
   $("#interactable").html("<li>" + currentRoom.items + "</li>");
   visibleLocation(currentLocation);
