@@ -48,8 +48,46 @@ var visibleLocation = function(inputLocation) {
   } else {
     $("#button-multidimention").show();
   }
+  if (currentRoom.room === "Coffin"){
+    $("#combat").show();
+  } else {
+    $("#combat").hide();
+  }
   return statusMessage;
 }
+function weaponDamage(){
+  playerOne.weaponDamage = "";
+}
+function zombieDamage(){
+  this.zombieDamage = 1;
+}
+nZombieDamage = new zombieDamage(1);
+zWeaponDamage = new weaponDamage(3);
+
+var combat = function() {
+  result = Math.floor((Math.random() * 20) + 1);
+  if (result >= 10) {
+    currentZombieHP.currentHP -= playerOne.weaponDamage;
+    currentPlayerHP.currentHP -= nZombieDamage.zombieDamage;
+  } else {
+    currentPlayerHP.hitPoints += 0;
+    currentZombieHP.zombieHitPoints += 0;
+  }
+}
+function zombie() {
+  this.zombieHitPoints = 5;
+  this.zombieDamage = 1;
+  this.critter = [];
+}
+function currentPlayerHP() {
+  this.currentHP = 10;
+}
+function currentZombieHP(){
+  this.currentHP = 5;
+}
+currentPlayerHP = new currentPlayerHP(10);
+currentZombieHP = new currentZombieHP(5);
+
 function Player() {
   this.hitPoints = 10;
   this.itemInventory = [];
@@ -57,6 +95,15 @@ function Player() {
   this.currentLocation = currentLocation;
   this.weaponDamage = 1;
   this.goldCount = 0;
+}
+zombie.prototype.zombieCritter = function() {
+  for (i = 0 < this.critter.length; i += 1;) {
+    if (this.critter[i] === "zombie") {
+      this.critter = true;
+    } else {
+      this.critter = false;
+    }
+  }
 }
 Player.prototype.weaponCheck = function() {
   weaponMessage = [];
@@ -155,6 +202,18 @@ $(document).ready(function() {
     $("#action-text").html(statusMessage.join(" "));
     $("#coin-counter").text("You have " + playerOne.goldCount + " gold coins.");
     statusMessage = [];
+  });
+  $("#button-combat").click(function() {
+    var result = combat();
+    $("#player-hp").html("<li> Current Hit Points:" + currentPlayerHP.currentHP + "</li>"); (this.currentZombieHP <= 5);
+    $("#zombie-hp").html("<li> Current Zombie Hit Points:" + currentZombieHP.currentHP + "</li>");
+    if (currentZombieHP.currentHP <= 0){
+      alert("The zombie is dead.");
+      $("#combat").hide();
+    } else if (currentPlayerHP.currentHP <= 0){
+      alert("You fought with courage, but died.");
+      $("#combat").hide();
+    }
   });
 });
 function Directions(north, south, east, west, items, room, treasure, multidimention) {
