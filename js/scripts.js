@@ -85,12 +85,6 @@ var visibleLocation = function(inputLocation) {
   }
   return statusMessage;
 }
-function weaponDamage(){
-  playerOne.weaponDamage = "";
-}
-function zombieDamage(){
-  this.zombieDamage = 1;
-}
 zombieOne = new Zombie();
 var combat = function() {
   result = Math.floor((Math.random() * 20) + 1);
