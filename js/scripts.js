@@ -9,7 +9,7 @@ function Directions(north, south, east, west, items, room, treasure, multidiment
   this.multidimention = multidimention;
 }
 var Forest = new Directions(false,false,true,false,["Stick"],"Forest",[false,0],false); //0,0,0 Forest
-var Gate = new Directions(false,false,true,true,[],"Gate",[true,0],true); //1,0,0 Gate
+var Gate = new Directions(false,false,true,true,["Key"],"Gate",[true,0],true); //1,0,0 Gate
 var Cave = new Directions(true,false,false,true,[],"Cave",[true,0],false);  //2,0,0 Cave
 var ArchedRoom = new Directions(true,true,false,true,[],"ArchedRoom",[true,0],false); //2,1,0 ArchedRoom
 var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom",[true,0],false);  //1,1,0 GreatRoom
@@ -135,20 +135,22 @@ Player.prototype.weaponCheck = function() {
   return weaponMessage.join(" ");
 }
 $(document).ready(function(){
+  var comboReturn = [];
   $("#button-unlock").click(function(event) {
     var comboLock = parseInt($("#comboInput").val());
     console.log(comboLock);
     if (comboLock > 666) {
-      statusMessage.push("Guess Lower");
+      comboReturn.push("Guess Lower");
     } else if (comboLock < 666) {
-      statusMessage.push("Guess Higher");
+      comboReturn.push("Guess Higher");
     } else if (comboLock === 666) {
-      statusMessage.push("Go fight the Monster!");
+      comboReturn.push("Go fight the Monster!");
       currentRoom.south = true;
       currentRoom.west = true;
     } else {
       alert("Don't break my game.");
     }
+    alert(comboReturn.pop());
     event.preventDefault();
   })
 })
