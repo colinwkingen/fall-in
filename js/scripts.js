@@ -68,9 +68,9 @@ var combat = function() {
   result = Math.floor((Math.random() * 20) + 1);
   if (result >= 10) {
     currentZombieHP.currentHP -= playerOne.weaponDamage;
-    currentPlayerHP.currentHP -= nZombieDamage.zombieDamage;
+    playerOne.hitPoints -= nZombieDamage.zombieDamage;
   } else {
-    currentPlayerHP.hitPoints += 0;
+    playerOne.hitPoints += 0;
     currentZombieHP.zombieHitPoints += 0;
   }
 }
@@ -205,7 +205,7 @@ $(document).ready(function() {
   });
   $("#button-combat").click(function() {
     var result = combat();
-    $("#player-hp").html("<li> Current Hit Points:" + currentPlayerHP.currentHP + "</li>"); (this.currentZombieHP <= 5);
+    $("#player-hp").html("<li> Current Hit Points:" + playerOne.hitPoints + "</li>"); (this.currentZombieHP <= 5);
     $("#zombie-hp").html("<li> Current Zombie Hit Points:" + currentZombieHP.currentHP + "</li>");
     if (currentZombieHP.currentHP <= 0){
       alert("The zombie is dead.");
@@ -213,6 +213,11 @@ $(document).ready(function() {
     } else if (currentPlayerHP.currentHP <= 0){
       alert("You fought with courage, but died.");
       $("#combat").hide();
+    }
+    if (currentZombieHP.currentHP > 0){
+      $("#button-south").hide();
+    } else {
+      $("#button-south").show();
     }
   });
 });
