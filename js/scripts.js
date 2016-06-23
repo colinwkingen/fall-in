@@ -102,7 +102,6 @@ $(document).ready(function() {
   });
   $("#button-interact").click(function() {
     if (currentRoom.items.length > 0) {
-<<<<<<< HEAD
       if (currentRoom.items[0] === "Potion") {
         playerOne.hitPoints += 5;
         currentRoom.items.shift(0,1);
@@ -113,14 +112,6 @@ $(document).ready(function() {
         $("#interactable").html("<li>" + currentRoom.items + "</li>");
         $("#inventory").html("");
         for (i = 0; i < playerOne.itemInventory.length; i += 1) {
-=======
-      playerOne.itemInventory.push(currentRoom.items[0]);
-      currentRoom.items.shift();
-      statusMessage.push(playerOne.weaponCheck());
-      $("#interactable").html("<li>" + currentRoom.items + "</li>");
-      $("#inventory").html("");
-      for (i = 0; i < playerOne.itemInventory.length; i += 1) {
->>>>>>> master
         $("#inventory").append("<li>" + playerOne.itemInventory[i] + "</li>");
         }
       }
