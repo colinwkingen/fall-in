@@ -13,7 +13,7 @@ var visibleLocation = function(inputLocation) {
   }
   if (currentRoom.treasure[0] === true ) {
     currentRoom.treasure[0] = false
-    currentRoom.treasure[1] = Math.floor(Math.random() * 5) + 2;
+    currentRoom.treasure[1] = Math.floor(Math.random() * 5) - 1;
   }
   if (currentRoom.treasure[1] > 0) {
     statusMessage.push("There are " + currentRoom.treasure[1] + " gold coins here.")
@@ -155,14 +155,14 @@ function Directions(north, south, east, west, items, room, treasure) {
 }
 
 var Forest = new Directions(false,false,true,false,["Stick"],"Forest",[true,0]); //0,0 Forest
- var Gate = new Directions(false,false,true,true,["Potion"],"Gate",[true,0]); //1,0 Gate
- var Cave = new Directions(true,false,false,true,[],"Cave",[true,0]);  //2,0 Cave
- var ArchedRoom = new Directions(true,true,false,true,[],"ArchedRoom",[true,0]); //2,1 ArchedRoom
- var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom",[true,0]);  //1,1 GreatRoom
- var StairDown = new Directions(true,false, true,false,[],"StairDown",[true,0]); //0,1 StairDown
- var Celler = new Directions(false,true,false,false,[],"Celler",[true,0]); //0,2 Celler
- var Well = new Directions(false,true,false,false,["Key"],"Well",[true,0]); //1,2 Well
- var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin",[true,0]); //2,2 Coffin
+var Gate = new Directions(false,false,true,true,["Potion"],"Gate",[true,0]); //1,0 Gate
+var Cave = new Directions(true,false,false,true,[],"Cave",[true,0]);  //2,0 Cave
+var ArchedRoom = new Directions(true,true,false,true,[],"ArchedRoom",[true,0]); //2,1 ArchedRoom
+var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom",[true,0]);  //1,1 GreatRoom
+var StairDown = new Directions(true,false, true,false,[],"StairDown",[true,0]); //0,1 StairDown
+var Celler = new Directions(false,true,false,false,[],"Celler",[true,0]); //0,2 Celler
+var Well = new Directions(false,true,false,false,["Key"],"Well",[true,0]); //1,2 Well
+var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin",[true,0]); //2,2 Coffin
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
 ];
