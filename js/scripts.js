@@ -130,11 +130,11 @@ $(document).ready(function() {
   });
   $("button").click(function() {
     $("coin-counter").text(goldInRoom);
-    goldinRoom = 0;
     statusMessage.push(visibleLocation(currentLocation));
     var goldInRoom = goldRoller();
-    if ( goldInRoom > 0 && currentRoom.treasure === true) {
-      currentRoom.treasure = false;
+    if ( goldInRoom > 0 && currentRoom.treasure[0] === true) {
+      currentRoom.treasure[0] = false;
+      currentRoom.treasure[1] = goldInRoom;
       statusMessage.push("There are a few dirty gold coins scattered about the room.");
       currentRoom.items.push("Coins")
       $("#interactable").append("<li> Gold Coins </li>");
@@ -152,15 +152,15 @@ function Directions(north, south, east, west, items, room, treasure) {
   this.room = room;
   this.treasure = treasure;
 }
-var Forest = new Directions(false,false,true,false,["Stick"],"Forest",true); //0,0 Forest
- var Gate = new Directions(false,false,true,true,[],"Gate",true); //1,0 Gate
- var Cave = new Directions(true,false,false,true,[],"Cave",true);  //2,0 Cave
- var ArchedRoom = new Directions(true,true,false,true,[],"ArchedRoom",true); //2,1 ArchedRoom
- var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom",true);  //1,1 GreatRoom
- var StairDown = new Directions(true,false, true,false,[],"StairDown",true); //0,1 StairDown
- var Celler = new Directions(false,true,false,false,[],"Celler",true); //0,2 Celler
- var Well = new Directions(false,true,false,false,["Key"],"Well",true); //1,2 Well
- var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin",true); //2,2 Coffin
+var Forest = new Directions(false,false,true,false,["Stick"],"Forest",[true,0]); //0,0 Forest
+ var Gate = new Directions(false,false,true,true,[],"Gate",[true,0]); //1,0 Gate
+ var Cave = new Directions(true,false,false,true,[],"Cave",[true,0]);  //2,0 Cave
+ var ArchedRoom = new Directions(true,true,false,true,[],"ArchedRoom",[true,0]); //2,1 ArchedRoom
+ var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom",[true,0]);  //1,1 GreatRoom
+ var StairDown = new Directions(true,false, true,false,[],"StairDown",[true,0]); //0,1 StairDown
+ var Celler = new Directions(false,true,false,false,[],"Celler",[true,0]); //0,2 Celler
+ var Well = new Directions(false,true,false,false,["Key"],"Well",[true,0]); //1,2 Well
+ var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin",[true,0]); //2,2 Coffin
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
 ];
