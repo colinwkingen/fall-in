@@ -14,6 +14,9 @@ body {
 .main_window {
   width: 90%;
 }
+#comboInput {
+  background-color: black;
+}
 .btn {
   font-size: 1.5em;
   background-color: #030803;

@@ -68,16 +68,19 @@ Player.prototype.weaponCheck = function() {
     }
   }
 }
-
 function comboLock(){
+  this.userInput = "#comboInput";
   this.comboLock = "666";
+}
+while (this.comboLock === "666") {
+  this.userInput >= "666";
 }
 
 comboLock.prototype.unlock = function(){
-  if (this.comboLock.match(/[6]/g)){
+  if (this.comboLock === "666"){
     return alert("the door is unlocked");
   }
-  else if (this.comboLock.match(/[^6]/g)){
+  else if (this.comboLock != "666"){
     return alert("that is not the correct combonation");
   }
 }
@@ -85,14 +88,13 @@ comboLock.prototype.unlock = function(){
 $(document).ready(function(){
   $("#button-unlock").click(function(event) {
     event.preventDefault();
-    if (this.comboLock = "666"){
-      console.log(this.comboLock);
-      return alert("the door is unlocked");
+    if (this.comboLock === "666"){
+      alert("You've unlocked the door!");
     }
-    else {
-      return alert("that is not the correct combonation");
-    }
-    $("#button-unlock").show(Coffin)
+    // else (this.userInput < this.comboLock)
+    // {
+    //   alert("That is the wrong code!");
+    // }
   })
 })
 
