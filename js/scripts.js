@@ -35,7 +35,21 @@ var visibleLocation = function(inputLocation) {
     $("#button-west").show()
   }
 }
-
+var combat = function() {
+  roll = Math.floor((Math.random() * 20) + 1);
+  if (roll >= 10) {
+    this.zombieHitPoints -= this.weaponDamage;
+    this.hitPoints -= this.zombieDamage;
+  } else {
+    this.hitPoints += 0;
+    this.zombieHitPoints += 0;
+  }
+}
+function zombie() {
+  this.zombieHitPoints = 5;
+  this.zombieDamage = 1;
+  this.critter = [];
+}
 function Player() {
   this.hitPoints = 10;
   this.itemInventory = [];
@@ -43,7 +57,15 @@ function Player() {
   this.currentLocation = currentLocation;
   this.weaponDamage = 1;
 }
-
+zombie.prototype.zombieCritter = function() {
+  for (i = 0 < this.critter.length; i += 1;) {
+    if (this.critter[i] === "zombie") {
+      this.critter = true;
+    } else {
+      this.critter = false;
+    }
+  }
+}
 Player.prototype.keyCheck = function() {
   if (this.hasKey === true) {
     alert("you have the key to open the door");
@@ -125,6 +147,10 @@ $(document).ready(function() {
     }
     playerOne.weaponCheck();
   });
+  $("#button-combat").click(function() {
+    $("#player-hp").html("<li> Current Hit Points:" + this.hitPoints + "</li>");
+    $("#zombie-hp").html("<li> Current Hit Points:" + this.zombieHitPoints + "</li>");
+  })
 });
 function Directions(north, south, east, west, items, room) {
   this.north = north;
