@@ -1,13 +1,5 @@
 var currentLocation = [0,0];
 var playerOne = new Player();
-var goldRoller = function() {
-  goldTotal = Math.floor(Math.random() * 5) - 2;
-  if (goldTotal <= 0) {
-    return;
-  } else {
-    return goldTotal;
-  }
-};
 var visibleLocation = function(inputLocation) {
   currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]]);
   var statusMessage = []
@@ -18,6 +10,13 @@ var visibleLocation = function(inputLocation) {
     } else {
       statusMessage.push("The gate is locked tight.")
     }
+  }
+  if (currentRoom.treasure[0] === true ) {
+    currentRoom.treasure[0] = false
+    currentRoom.treasure[1] = Math.floor(Math.random() * 5) + 2;
+  }
+  if (currentRoom.treasure[1] > 0) {
+    statusMessage.push("There are " + currentRoom.treasure[1] + " gold coins here.")
   }
   $(".location").hide();
   var locationId = "#" + inputLocation[0].toString() + "-" + inputLocation[1].toString();
@@ -126,14 +125,13 @@ $(document).ready(function() {
         $("#interactable").html("<li>" + currentRoom.items + "</li>");
         $("#inventory").html("");
         for (i = 0; i < playerOne.itemInventory.length; i += 1) {
-        $("#inventory").append("<li>" + playerOne.itemInventory[i] + "</li>");
+          $("#inventory").append("<li>" + playerOne.itemInventory[i] + "</li>");
         }
       }
-      if (currentRoom.treasure[0] === true && currentRoom.treasure[1] != 0)
-        currentRoom.treasure[0] = false;
-        playerOne.goldCount += currentRoom.treasure[1];
-        alert(playerOne.goldCount)
-        $("#coin-counter").text("You have " + playerOne.goldCount.toString() + " gold coins.");
+    } if (currentRoom.treasure[1] > 0) {
+      statusMessage.push("You picked up the coins.");
+      playerOne.goldCount += currentRoom.treasure[1];
+      currentRoom.treasure[1] = 0;
     } else {
       statusMessage.push("There is nothing here to pick up.");
     }
@@ -142,7 +140,6 @@ $(document).ready(function() {
     if (playerOne.itemInventory.length > 0 ) {
       currentRoom.items.push(playerOne.itemInventory[0]);
       playerOne.itemInventory.shift();
-      statusMessage.push(playerOne.weaponCheck());
       $("#inventory").html("<li>" + playerOne.itemInventory + "</li>");
       $("#interactable").html("");
       for (i = 0; i < currentRoom.items.length; i += 1) {
@@ -154,13 +151,9 @@ $(document).ready(function() {
   });
   $("button").click(function() {
     statusMessage.push(visibleLocation(currentLocation));
-    var goldInRoom = goldRoller();
-    if ( goldInRoom > 0 && currentRoom.treasure[0] === true) {
-      currentRoom.treasure[1] = goldInRoom;
-      statusMessage.push("There are a few dirty gold coins scattered about the room.");
-      $("#interactable").append("<li> Gold Coins </li>");
-    }
+    statusMessage.push(playerOne.weaponCheck());
     $("#action-text").html(statusMessage.join(" "));
+    $("#coin-counter").text("You have " + playerOne.goldCount + " gold coins.");
     statusMessage = [];
   });
 });
@@ -191,6 +184,7 @@ var Forest6 = new Directions(true,false,false,true,[],"Forest6",[false,0],false)
 var Forest7 = new Directions(false,true,true,true,[],"Forest7",[false,0],false); //5,1 Forest
 var Attack = new Directions(true,false,false,false,[],"Attack",[false,0],false); //6,0 Attack
 var Combo = new Directions(false,true,false,false,[],"Combo",[false,0],false); //6,1 Combo
+
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin],[Forest2,Forest3],[Forest4,Forest5],[Forest6,Forest7],[Attack,Combo]
 ];
