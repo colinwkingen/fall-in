@@ -1,5 +1,13 @@
 var currentLocation = [0,0];
 var playerOne = new Player();
+var goldRoller = function() {
+  goldTotal = Math.floor(Math.random() * 5) - 2;
+  if (goldTotal <= 0) {
+    return;
+  } else {
+    return goldTotal;
+  }
+};
 var visibleLocation = function(inputLocation) {
   currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]]);
   var statusMessage = []
@@ -45,7 +53,6 @@ function Player() {
   this.currentLocation = currentLocation;
   this.weaponDamage = 1;
 }
-
 Player.prototype.weaponCheck = function() {
   weaponMessage = [];
   var haveKnife = false;
@@ -68,7 +75,6 @@ Player.prototype.weaponCheck = function() {
   }
   return weaponMessage;
 }
-
 $(document).ready(function() {
   $("#interactable").html("<li>" + currentRoom.items + "</li>");
   visibleLocation(currentLocation);
@@ -123,7 +129,12 @@ $(document).ready(function() {
     }
   });
   $("button").click(function() {
-      statusMessage.push(visibleLocation(currentLocation));
+    statusMessage.push(visibleLocation(currentLocation));
+    goldInRoom = goldRoller();
+    if ( goldInRoom > 0 ) {
+      statusMessage.push("There are a few dirty gold coins scattered about the room.");
+      currentRoom.items.push("<li>" + goldInRoom + " tarnished gold coins.</li>")
+    }
     $("#action-text").html(statusMessage.join(" "));
     statusMessage = [];
   });
@@ -145,7 +156,6 @@ var Forest = new Directions(false,false,true,false,["Stick"],"Forest"); //0,0 Fo
  var Celler = new Directions(false,true,false,false,[],"Celler"); //0,2 Celler
  var Well = new Directions(false,true,false,false,["Key"],"Well"); //1,2 Well
  var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin"); //2,2 Coffin
-
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
 ];
