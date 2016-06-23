@@ -155,6 +155,8 @@ $(document).ready(function(){
   })
 })
 $(document).ready(function() {
+  $("#coin-counter").text("You have " + playerOne.goldCount + " gold coins.");
+  $("#hitpoint-counter").text("You have " + playerOne.hitPoints + " hit points.")
   $("#interactable").html("<li>" + currentRoom.items + "</li>");
   visibleLocation(currentLocation);
   var statusMessage = []
@@ -230,6 +232,7 @@ $(document).ready(function() {
     statusMessage.push(playerOne.weaponCheck());
     $("#action-text").html(statusMessage.join(" "));
     $("#coin-counter").text("You have " + playerOne.goldCount + " gold coins.");
+    $("#hitpoint-counter").text("You have " + playerOne.hitPoints + " hit point.")
     statusMessage = [];
   });
   $("#button-combat").click(function() {
