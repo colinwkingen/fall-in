@@ -30,7 +30,7 @@ To install this repository into a new project each time, first
 
 ## Known Bugs
 
-None.  But we haven't really tested much, so if you find anything, let us know and we'll fix it and update the repo.  
+No currently known bugs. Please contact us if a bug is encountered.
 
 ## Support and contact details
 
@@ -38,8 +38,10 @@ Come by during class if you have questions.
 
 ## Technologies Used
 
+* HTML
 * Bootstrap
 * JQuery
+* CSS
 
 ### License
 
