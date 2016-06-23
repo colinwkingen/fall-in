@@ -16,11 +16,11 @@ var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom",[true,0],fals
 var StairDown = new Directions(true,false, true,false,[],"StairDown",[true,0],false); //0,1,0 StairDown
 var Celler = new Directions(false,true,false,false,["Potion"],"Celler",[true,0],false); //0,2,0 Celler
 var Well = new Directions(false,true,false,false,["Key"],"Well",[true,0],false); //1,2,0 Well
-var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin",[true,0],false); //2,2,0 Coffin
+var Coffin = new Directions(false,true,false,false,["Knife","Potion"],"Coffin",[true,0],false); //2,2,0 Coffin
 var Forest2 = new Directions(true,false,true,false,[],"Forest2",[false,0],false); //3,0 Forest
 var Forest3 = new Directions(false,true,true,false,[],"Forest3",[false,0],false); //3,1 Forest
 var Forest4 = new Directions(true,false,true,true,[],"Forest4",[false,0],false); //4,0 Forest
-var Forest5 = new Directions(false,true,true,true,[],"Forest5",[false,0],false); //4,1 Forest
+var Forest5 = new Directions(false,true,true,true,["Potion"],"Forest5",[false,0],false); //4,1 Forest
 var Forest6 = new Directions(true,false,false,true,[],"Forest6",[false,0],false); //5,0 Forest
 var Forest7 = new Directions(false,true,true,true,[],"Forest7",[false,0],false); //5,1 Forest
 var Attack = new Directions(true,false,false,false,[],"Attack",[false,0],false); //6,0 Attack
@@ -31,7 +31,6 @@ var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin],[Forest2,Forest3],[Forest4,Forest5],[Forest6,Forest7],[Attack,Combo]
 ];
 var currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]]);
-
 var visibleLocation = function(inputLocation) {
   currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]]);
   var statusMessage = []
@@ -83,7 +82,7 @@ var visibleLocation = function(inputLocation) {
   } else {
     $("#roomLock").hide();
   }
-  if (currentRoom.room === "Coffin"){
+  if (currentRoom.room === "Coffin" && zombieOne.zombieHitPoints > 0 ){
     $("#combat").show();
   } else {
     $("#combat").hide();
@@ -104,7 +103,6 @@ var combat = function() {
 function Zombie() {
   this.zombieHitPoints = 5;
   this.zombieDamage = 1;
-  this.critter = [];
 }
 function Player() {
   this.hitPoints = 10;
@@ -113,15 +111,6 @@ function Player() {
   this.currentLocation = currentLocation;
   this.weaponDamage = 1;
   this.goldCount = 0;
-}
-Zombie.prototype.zombieCritter = function() {
-  for (i = 0 < this.critter.length; i += 1;) {
-    if (this.critter[i] === "zombie") {
-      this.critter = true;
-    } else {
-      this.critter = false;
-    }
-  }
 }
 Player.prototype.weaponCheck = function() {
   weaponMessage = [];
@@ -150,20 +139,19 @@ $(document).ready(function(){
     var comboLock = parseInt($("#comboInput").val());
     console.log(comboLock);
     if (comboLock > 666) {
-      alert("guess lower");
+      statusMessage.push("Guess Lower");
     } else if (comboLock < 666) {
-      alert("guess higher");
+      statusMessage.push("Guess Higher");
     } else if (comboLock === 666) {
-      alert("go fight the monster")
+      statusMessage.push("Go fight the Monster!");
       currentRoom.south = true;
       currentRoom.west = true;
     } else {
-      alert("don't break my game!");
+      alert("Don't break my game.");
     }
     event.preventDefault();
   })
 })
-
 $(document).ready(function() {
   $("#interactable").html("<li>" + currentRoom.items + "</li>");
   visibleLocation(currentLocation);
@@ -251,11 +239,17 @@ $(document).ready(function() {
     $("#player-hp").html("<li> Current Hit Points:" + playerOne.hitPoints + "</li>"); (zombieOne.zombieHitPoints <= 5);
     $("#zombie-hp").html("<li> Current Zombie Hit Points:" + zombieOne.zombieHitPoints + "</li>");
     if (zombieOne.zombieHitPoints <= 0){
-      alert("The zombie is dead.");
+      statusMessage.push("You have defeated the horrible zombie.");
       $("#combat").hide();
     } else if (playerOne.hitPoints <= 0){
-      alert("You fought with courage, but died.");
+      statusMessage.push("You fought with courage, but died.");
       $("#combat").hide();
+    }
+    if (zombieOne.zombieHitPoints > 0) {
+      $("#button-south").hide();
+    } else {
+      $("#action-text").html(statusMessage.join(" "));
+      $("#button-south").show();
     }
   });
 });

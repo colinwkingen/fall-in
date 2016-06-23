@@ -14,8 +14,9 @@ Ping Pong game
 |---|---|---|
 | Button input changes the output text on the screen  |  north |  character goes north in the game |
 | If the input takes you off the screen then it return and "error" and doesn't move you  |  north | "you ran into a wall and cannot move farther"   |
-|  Pick up items/interact with computer AI |   |   |
-| fight dragon or open locked door  |   |   |
+|  Pick up items/interact with computer AI | Pick Up | You have a heavy stick  |
+| Fight an AI  | Fight  | Current Health -1; Current Enemy Health -2  |
+| Open a Door | Code or Key | You've entered the correct code or The gate has opened |
 
 
 
@@ -29,7 +30,7 @@ To install this repository into a new project each time, first
 
 ## Known Bugs
 
-None.  But we haven't really tested much, so if you find anything, let us know and we'll fix it and update the repo.  
+No currently known bugs. Please contact us if a bug is encountered.
 
 ## Support and contact details
 
@@ -37,8 +38,10 @@ Come by during class if you have questions.
 
 ## Technologies Used
 
+* HTML
 * Bootstrap
 * JQuery
+* CSS
 
 ### License
 
