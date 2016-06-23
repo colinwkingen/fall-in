@@ -1,12 +1,11 @@
 # Fall In
-
-#### This is a text based adventure game based on the ancient game of Zork
+###### This is a text based adventure game based on the ancient game of Zork
 
 #### By Colin Kingen James Howard Cameron Poore Matthew Giem, June 21-23, 2016
 
 ## Description
 
-Fall In is a text based adventure game that allows the player to fight monsters, pick up coins, use potions and acquire weapons to defend yourself with. You are able to move through rooms with different descriptions that will immerse the user within the game. It was created as a final class project. 
+Fall In is a text based adventure game that allows the player to fight monsters, pick up coins, use potions and acquire weapons to defend yourself with. You are able to move through rooms with different descriptions that will immerse the user within the game. It was created as a final class project.
 
 ## Specifications
 
