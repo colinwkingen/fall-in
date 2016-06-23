@@ -9,7 +9,7 @@ body {
   text-align: center;
 }
 #main_output p {
-  font-size: 2.5em;
+  font-size: 2em;
 }
 .main_window {
   width: 90%;
@@ -39,4 +39,7 @@ ul {
 }
 .btn:active {
   color: red;
+}
+#action-text {
+  font-size: 1.5em;
 }
