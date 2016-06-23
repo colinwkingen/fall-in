@@ -34,15 +34,29 @@ var visibleLocation = function(inputLocation) {
   } else {
     $("#button-west").show()
   }
-}
-var combat = function() {
-  roll = Math.floor((Math.random() * 20) + 1);
-  if (roll >= 10) {
-    zombie.currentHP -= this.weaponDamage;
-    player.currentHP -= this.zombieDamage;
+  if (currentRoom.room === "Coffin"){
+    $("#combat").show();
   } else {
-    this.hitPoints += 0;
-    this.zombieHitPoints += 0;
+    $("#combat").hide();
+  }
+}
+function weaponDamage(){
+  this.weaponDamage = 3;
+}
+function zombieDamage(){
+  this.zombieDamage = 1;
+}
+nZombieDamage = new zombieDamage(1);
+zWeaponDamage = new weaponDamage(3);
+
+var combat = function() {
+  result = Math.floor((Math.random() * 20) + 1);
+  if (result >= 10) {
+    currentZombieHP.currentHP -= zWeaponDamage.weaponDamage;
+    currentPlayerHP.currentHP -= nZombieDamage.zombieDamage;
+  } else {
+    currentPlayerHP.hitPoints += 0;
+    currentZombieHP.zombieHitPoints += 0;
   }
 }
 function zombie() {
@@ -53,7 +67,7 @@ function zombie() {
 function currentPlayerHP() {
   this.currentHP = 10;
 }
-function currentZombieHP() {
+function currentZombieHP(){
   this.currentHP = 5;
 }
 currentPlayerHP = new currentPlayerHP(10);
@@ -157,8 +171,13 @@ $(document).ready(function() {
     playerOne.weaponCheck();
   });
   $("#button-combat").click(function() {
-    $("#player-hp").html("<li> Current Hit Points:" + currentPlayerHP.currentHP + "</li>");
+    var result = combat();
+    $("#player-hp").html("<li> Current Hit Points:" + currentPlayerHP.currentHP + "</li>"); (this.currentZombieHP <= 5);
     $("#zombie-hp").html("<li> Current Zombie Hit Points:" + currentZombieHP.currentHP + "</li>");
+    if (currentZombieHP.currentHP <= 0){
+      alert("The zombie is dead.");
+      $("#combat").hide();
+    }
   })
 });
 function Directions(north, south, east, west, items, room, critter) {
@@ -178,7 +197,7 @@ var Forest = new Directions(false,false,true,false,["Stick"],"Forest",[]); //0,0
  var StairDown = new Directions(true,false, true,false,[],"StairDown",[]); //0,1 StairDown
  var Celler = new Directions(false,true,false,false,[],"Celler",[]); //0,2 Celler
  var Well = new Directions(false,true,false,false,["Key"],"Well",[]); //1,2 Well
- var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin",["zombie"]); //2,2 Coffin
+ var Coffin = new  Directions(false,true,false,false,["Knife"],"Coffin",["zombie"]); //2,2 Coffin
 
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
