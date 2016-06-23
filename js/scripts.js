@@ -237,15 +237,16 @@ $(document).ready(function() {
     $("#player-hp").html("<li> Current Hit Points:" + playerOne.hitPoints + "</li>"); (zombieOne.zombieHitPoints <= 5);
     $("#zombie-hp").html("<li> Current Zombie Hit Points:" + zombieOne.zombieHitPoints + "</li>");
     if (zombieOne.zombieHitPoints <= 0){
-      alert("The zombie is dead.");
+      statusMessage.push("You have defeated the horrible zombie.");
       $("#combat").hide();
     } else if (playerOne.hitPoints <= 0){
-      alert("You fought with courage, but died.");
+      statusMessage.push("You fought with courage, but died.");
       $("#combat").hide();
     }
     if (zombieOne.zombieHitPoints > 0) {
       $("#button-south").hide();
     } else {
+      $("#action-text").html(statusMessage.join(" "));
       $("#button-south").show();
     }
   });
