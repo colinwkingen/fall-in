@@ -44,6 +44,11 @@ var visibleLocation = function(inputLocation) {
   } else {
     $("#button-west").show();
   }
+  if (currentRoom.mulitdimention === false) {
+    $("#button-mulitdimention").hide();
+  } else {
+    $("#button-mulitdimention").show();
+  }
   return statusMessage;
 }
 function Player() {
@@ -100,9 +105,18 @@ $(document).ready(function() {
     if (currentRoom.west) {
       currentLocation[0] -= 1;
     }
+    });
+  $("#button-mulitdimention").click(function() {
+    if (currentRoom.mulitdimention) {
+      currentLocation[0] += 2;
+      currentLocation[1] +=1;
+    }
   });
   $("#button-interact").click(function() {
     if (currentRoom.items.length > 0) {
+      if (currentRoom.items[0] === "Key") {
+        Gate.mulitdimention = true;
+      }
       if (currentRoom.items[0] === "Potion") {
         playerOne.hitPoints += 5;
         currentRoom.items.shift(0,1);
@@ -151,7 +165,7 @@ $(document).ready(function() {
     statusMessage = [];
   });
 });
-function Directions(north, south, east, west, items, room, treasure) {
+function Directions(north, south, east, west, items, room, treasure, mulitdimention) {
   this.north = north;
   this.south = south;
   this.east = east;
@@ -159,17 +173,24 @@ function Directions(north, south, east, west, items, room, treasure) {
   this.items = items;
   this.room = room;
   this.treasure = treasure;
+  this.mulitdimention = mulitdimention;
 }
-var Forest = new Directions(false,false,true,false,["Stick"],"Forest",[true,0]); //0,0 Forest
- var Gate = new Directions(false,false,true,true,["Potion"],"Gate",[true,0]); //1,0 Gate
- var Cave = new Directions(true,false,false,true,[],"Cave",[true,0]);  //2,0 Cave
- var ArchedRoom = new Directions(true,true,false,true,[],"ArchedRoom",[true,0]); //2,1 ArchedRoom
- var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom",[true,0]);  //1,1 GreatRoom
- var StairDown = new Directions(true,false, true,false,[],"StairDown",[true,0]); //0,1 StairDown
- var Celler = new Directions(false,true,false,false,[],"Celler",[true,0]); //0,2 Celler
- var Well = new Directions(false,true,false,false,["Key"],"Well",[true,0]); //1,2 Well
- var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin",[true,0]); //2,2 Coffin
+var Forest = new Directions(false,false,true,false,["Stick"],"Forest",[true,0],false); //0,0,0 Forest
+var Gate = new Directions(false,false,true,true,["Potion"],"Gate",[true,0],true); //1,0,0 Gate
+var Cave = new Directions(true,false,false,true,[],"Cave",[true,0],false);  //2,0,0 Cave
+var ArchedRoom = new Directions(true,true,false,true,[],"ArchedRoom",[true,0],false); //2,1,0 ArchedRoom
+var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom",[true,0],false);  //1,1,0 GreatRoom
+var StairDown = new Directions(true,false, true,false,[],"StairDown",[true,0],false); //0,1,0 StairDown
+var Celler = new Directions(false,true,false,false,[],"Celler",[true,0],false); //0,2,0 Celler
+var Well = new Directions(false,true,false,false,["Key"],"Well",[true,0],false); //1,2,0 Well
+var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin",[true,0],false); //2,2,0 Coffin
+var Forest2 = new Directions(true,false,true,false,[],"Forest2",[false,0],false); //3,0 Forest
+var Forest3 = new Directions(false,true,true,false,[],"Forest3",[false,0],false); //3,1 Forest
+var Forest4 = new Directions(true,false,true,true,[],"Forest4",[false,0],false); //4,0 Forest
+var Forest5 = new Directions(false,true,true,true,[],"Forest5",[false,0],false); //4,1 Forest
+var Forest6 = new Directions(true,false,false,true,[],"Forest6",[false,0],false); //5,0 Forest
+var Forest7 = new Directions(false,true,false,true,[],"Forest7",[false,0],false); //5,1 Forest
 var arrayOfDirections = [
-[Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
+[Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin],[Forest2,Forest3],[Forest4,Forest5],[Forest6,Forest7]
 ];
 var currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]]);
