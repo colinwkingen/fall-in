@@ -69,6 +69,33 @@ Player.prototype.weaponCheck = function() {
   }
 }
 
+function comboLock(){
+  this.comboLock = "666";
+}
+
+comboLock.prototype.unlock = function(){
+  if (this.comboLock.match(/[6]/g)){
+    return alert("the door is unlocked");
+  }
+  else if (this.comboLock.match(/[^6]/g)){
+    return alert("that is not the correct combonation");
+  }
+}
+
+$(document).ready(function(){
+  $("#button-unlock").click(function(event) {
+    event.preventDefault();
+    if (this.comboLock = "666"){
+      console.log(this.comboLock);
+      return alert("the door is unlocked");
+    }
+    else {
+      return alert("that is not the correct combonation");
+    }
+    $("#button-unlock").show(Coffin)
+  })
+})
+
 $(document).ready(function() {
   $("#interactable").html("<li>" + currentRoom.items + "</li>");
   visibleLocation(currentLocation);
