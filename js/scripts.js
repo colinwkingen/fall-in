@@ -48,6 +48,11 @@ var visibleLocation = function(inputLocation) {
   } else {
     $("#button-multidimention").show();
   }
+  if (currentRoom.room === "Combo") {
+    $("#roomLock").show();
+  } else {
+    $("#roomLock").hide();
+  }
   if (currentRoom.room === "Coffin"){
     $("#combat").show();
   } else {
@@ -127,6 +132,25 @@ Player.prototype.weaponCheck = function() {
   }
   return weaponMessage;
 }
+$(document).ready(function(){
+  $("#button-unlock").click(function(event) {
+    var comboLock = parseInt($("#comboInput").val());
+    console.log(comboLock);
+    if (comboLock > 666) {
+      alert("guess lower");
+    } else if (comboLock < 666) {
+      alert("guess higher");
+    } else if (comboLock === 666) {
+      alert("go fight the monster")
+      currentRoom.south = true;
+      currentRoom.west = true;
+    } else {
+      alert("don't break my game!");
+    }
+    event.preventDefault();
+  })
+})
+
 $(document).ready(function() {
   $("#interactable").html("<li>" + currentRoom.items + "</li>");
   visibleLocation(currentLocation);
@@ -242,7 +266,7 @@ var Forest5 = new Directions(false,true,true,true,[],"Forest5",[false,0],false);
 var Forest6 = new Directions(true,false,false,true,[],"Forest6",[false,0],false); //5,0 Forest
 var Forest7 = new Directions(false,true,true,true,[],"Forest7",[false,0],false); //5,1 Forest
 var Attack = new Directions(true,false,false,false,[],"Attack",[false,0],false); //6,0 Attack
-var Combo = new Directions(false,true,false,false,[],"Combo",[false,0],false); //6,1 Combo
+var Combo = new Directions(false,false,false,false,[],"Combo",[false,0],false); //6,1 Combo
 
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin],[Forest2,Forest3],[Forest4,Forest5],[Forest6,Forest7],[Attack,Combo]
