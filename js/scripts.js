@@ -2,11 +2,13 @@ var currentLocation = [0,0];
 var playerOne = new Player();
 var visibleLocation = function(inputLocation) {
   currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]]);
+  var statusMessage = []
+  statusMessage = []
   if (currentRoom.room === "Gate") {
     if (playerOne.hasKey === true) {
-      alert("you shall pass");
+      statusMessage.push("The gate opens when you use your key.")
     } else {
-      alert("go find the key to enter the secert room");
+      statusMessage.push("The gate is locked tight.")
     }
   }
   $(".location").hide();
@@ -20,20 +22,21 @@ var visibleLocation = function(inputLocation) {
     $("#button-north").show()
   }
   if (currentRoom.south === false) {
-    $("#button-south").hide()
+    $("#button-south").hide();
   } else {
-    $("#button-south").show()
+    $("#button-south").show();
   }
   if (currentRoom.east === false) {
-    $("#button-east").hide()
+    $("#button-east").hide();
   } else {
-    $("#button-east").show()
+    $("#button-east").show();
   }
   if (currentRoom.west === false) {
-    $("#button-west").hide()
+    $("#button-west").hide();
   } else {
-    $("#button-west").show()
+    $("#button-west").show();
   }
+  return statusMessage;
 }
 function Player() {
   this.hitPoints = 10;
@@ -42,88 +45,112 @@ function Player() {
   this.currentLocation = currentLocation;
   this.weaponDamage = 1;
 }
-Player.prototype.keyCheck = function() {
-  if (this.hasKey === true) {
-    alert("you have the key to open the door");
-  } else {
-    alert("you still don't have the key");
-  }
-}
+// Player.prototype.keyCheck = function() {
+//   if (this.hasKey === true) {
+//     alert("you have the key to open the door");
+//   } else {
+//     alert("you still don't have the key");
+//   }
+// }
 Player.prototype.weaponCheck = function() {
+  weaponMessage = [];
   var haveKnife = false;
   this.hasKey = false;
   this.weaponDamage = 1;
   for (i = 0; i < this.itemInventory.length; i += 1) {
     if (this.itemInventory[i] === "Key") {
       this.hasKey = true;
+      weaponMessage.push("You found a key.");
     } else if (this.itemInventory[i] === "Knife") {
       this.weaponDamage = 3
       haveKnife = true;
+      weaponMessage.push("You found a rusty knife.");
     } else if (this.itemInventory[i] === "Stick") {
       if (haveKnife === false) {
         this.weaponDamage = 2;
+      weaponMessage.push("You have a heavy stick.");
       }
     }
   }
+  return weaponMessage;
 }
 
 $(document).ready(function() {
   $("#interactable").html("<li>" + currentRoom.items + "</li>");
   visibleLocation(currentLocation);
+  var statusMessage = []
+  statusMessage = [];
   $("#button-north").click(function() {
     if (currentRoom.north) {
       currentLocation[1] += 1;
-      visibleLocation(currentLocation);
+      statusMessage.push(visibleLocation(currentLocation));
     }
   });
   $("#button-south").click(function() {
     if (currentRoom.south) {
       currentLocation[1] -= 1;
-      visibleLocation(currentLocation);
+      statusMessage.push(visibleLocation(currentLocation));
     }
   });
   $("#button-east").click(function() {
     if (currentRoom.east) {
       currentLocation[0] += 1;
-      visibleLocation(currentLocation);
+      statusMessage.push(visibleLocation(currentLocation));
     }
   });
   $("#button-west").click(function() {
     if (currentRoom.west) {
       currentLocation[0] -= 1;
-      visibleLocation(currentLocation);
+      statusMessage.push(visibleLocation(currentLocation));
     }
   });
   $("#button-interact").click(function() {
     if (currentRoom.items.length > 0) {
       playerOne.itemInventory.push(currentRoom.items[0]);
-      currentRoom.items.shift(0,1);
+      currentRoom.items.shift();
       $("#interactable").html("<li>" + currentRoom.items + "</li>");
       $("#inventory").html("");
       for (i = 0; i < playerOne.itemInventory.length; i += 1) {
         $("#inventory").append("<li>" + playerOne.itemInventory[i] + "</li>");
       }
     } else {
-      alert("There is nothing here to pick up.");
+      statusMessage.push("There is nothing here to pick up.");
     }
-    var itemStatus = playerOne.weaponCheck();
   });
   $("#button-drop").click(function() {
     if (playerOne.itemInventory.length > 0 ) {
       currentRoom.items.push(playerOne.itemInventory[0]);
       playerOne.itemInventory.shift();
-      playerOne.weaponCheck();
       $("#inventory").html("<li>" + playerOne.itemInventory + "</li>");
       $("#interactable").html("");
       for (i = 0; i < currentRoom.items.length; i += 1) {
         $("#interactable").append("<li>" + currentRoom.items[i] + "</li>");
       }
     } else {
-      alert("You have nothing to drop!");
+      statusMessage.push("You have nothing to drop!");
     }
-    var itemStatus =playerOne.weaponCheck();
+  });
+  $("button").click(function() {
+    statusMessage.push(playerOne.weaponCheck());
+    $("#action-text").html(statusMessage.join(" "));
+    statusMessage = [];
   });
 });
+
+// var itemStatus = function(room,player,locationCoordinates) {
+//   var statusMessage = [];
+//   if (currentRoom.room === "Gate") {
+//     if (playerOne.hasKey === true) {
+//       statusMessage.push("you shall pass");
+//     } else {
+//       statusMessage.push("go find the key to enter the secret room");
+//     }
+//   }
+//   for (i = 0; i < player.items.length; i++) {
+//     if
+//   }
+// };
+
 function Directions(north, south, east, west, items, room) {
   this.north = north;
   this.south = south;
