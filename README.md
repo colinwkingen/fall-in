@@ -2,13 +2,13 @@
 
 #### This is a text based adventure game based on the ancient game of Zork
 
-#### By Colin Kingen James Howard Cameron Poore Matthew Giem
+#### By Colin Kingen James Howard Cameron Poore Matthew Giem, June 21-23, 2016
 
 ## Description
 
-this is a page return a list of numbers following the rules outlined in the page
+Fall In is a text based adventure game that allows the player to fight monsters, pick up coins, use potions and acquire weapons to defend yourself with. You are able to move through rooms with different descriptions that will immerse the user within the game. It was created as a final class project. 
 
-Ping Pong game
+## Specifications
 
 |Behavior    |Input   |Output   |
 |---|---|---|
