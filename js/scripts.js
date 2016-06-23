@@ -149,26 +149,27 @@ $(document).ready(function() {
   });
   $("#button-combat").click(function() {
     $("#player-hp").html("<li> Current Hit Points:" + this.hitPoints + "</li>");
-    $("#zombie-hp").html("<li> Current Hit Points:" + this.zombieHitPoints + "</li>");
+    $("#zombie-hp").html("<li> Current Zombie Hit Points:" + this.zombieHitPoints + "</li>");
   })
 });
-function Directions(north, south, east, west, items, room) {
+function Directions(north, south, east, west, items, room, critter) {
   this.north = north;
   this.south = south;
   this.east = east;
   this.west = west;
   this.items = items;
   this.room = room;
+  this.critter = critter;
 }
-var Forest = new Directions(false,false,true,false,["Stick"],"Forest"); //0,0 Forest
- var Gate = new Directions(false,false,true,true,[],"Gate"); //1,0 Gate
- var Cave = new Directions(true,false,false,true,[],"Cave");  //2,0 Cave
- var ArchedRoom = new Directions(true,true,false,true,[],"ArchedRoom"); //2,1 ArchedRoom
- var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom");  //1,1 GreatRoom
- var StairDown = new Directions(true,false, true,false,[],"StairDown"); //0,1 StairDown
- var Celler = new Directions(false,true,false,false,[],"Celler"); //0,2 Celler
- var Well = new Directions(false,true,false,false,["Key"],"Well"); //1,2 Well
- var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin"); //2,2 Coffin
+var Forest = new Directions(false,false,true,false,["Stick"],"Forest",[]); //0,0 Forest
+ var Gate = new Directions(false,false,true,true,[],"Gate",[]); //1,0 Gate
+ var Cave = new Directions(true,false,false,true,[],"Cave",[]);  //2,0 Cave
+ var ArchedRoom = new Directions(true,true,false,true,[],"ArchedRoom",[]); //2,1 ArchedRoom
+ var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom",[]);  //1,1 GreatRoom
+ var StairDown = new Directions(true,false, true,false,[],"StairDown",[]); //0,1 StairDown
+ var Celler = new Directions(false,true,false,false,[],"Celler",[]); //0,2 Celler
+ var Well = new Directions(false,true,false,false,["Key"],"Well",[]); //1,2 Well
+ var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin","zombie"); //2,2 Coffin
 
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
