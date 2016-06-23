@@ -1,5 +1,6 @@
 var currentLocation = [0,0];
 var playerOne = new Player();
+var currentHP = new currentHP();
 var visibleLocation = function(inputLocation) {
   currentRoom = (arrayOfDirections[currentLocation[0]][currentLocation[1]]);
   if (currentRoom.room === "Gate") {
@@ -35,11 +36,15 @@ var visibleLocation = function(inputLocation) {
     $("#button-west").show()
   }
 }
+var hitPoints = function() {
+  this.hitPoints = 10;
+  this.zombieHitPoints = 5;
+}
 var combat = function() {
   roll = Math.floor((Math.random() * 20) + 1);
   if (roll >= 10) {
-    this.zombieHitPoints -= this.weaponDamage;
-    this.hitPoints -= this.zombieDamage;
+    zombie.currentHP -= this.weaponDamage;
+    player.currentHP -= this.zombieDamage;
   } else {
     this.hitPoints += 0;
     this.zombieHitPoints += 0;
@@ -49,6 +54,10 @@ function zombie() {
   this.zombieHitPoints = 5;
   this.zombieDamage = 1;
   this.critter = [];
+}
+function currentHP() {
+  Player.currentHP = 10;
+  zombie.currentHP = 5;
 }
 function Player() {
   this.hitPoints = 10;
@@ -148,6 +157,7 @@ $(document).ready(function() {
     playerOne.weaponCheck();
   });
   $("#button-combat").click(function() {
+    if (Player.currentHP)
     $("#player-hp").html("<li> Current Hit Points:" + this.hitPoints + "</li>");
     $("#zombie-hp").html("<li> Current Zombie Hit Points:" + this.zombieHitPoints + "</li>");
   })
@@ -169,7 +179,7 @@ var Forest = new Directions(false,false,true,false,["Stick"],"Forest",[]); //0,0
  var StairDown = new Directions(true,false, true,false,[],"StairDown",[]); //0,1 StairDown
  var Celler = new Directions(false,true,false,false,[],"Celler",[]); //0,2 Celler
  var Well = new Directions(false,true,false,false,["Key"],"Well",[]); //1,2 Well
- var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin","zombie"); //2,2 Coffin
+ var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin",["zombie"]); //2,2 Coffin
 
 var arrayOfDirections = [
 [Forest,StairDown,Celler],[Gate,GreatRoom,Well],[Cave,ArchedRoom,Coffin]
