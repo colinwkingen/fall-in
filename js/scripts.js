@@ -10,12 +10,10 @@ var visibleLocation = function(inputLocation) {
     } else {
       statusMessage.push("The gate is locked tight.")
     }
-  }
-  if (currentRoom.treasure[0] === true ) {
+  } else if (currentRoom.treasure[0] === true ) {
     currentRoom.treasure[0] = false
     currentRoom.treasure[1] = Math.floor(Math.random() * 5) - 1;
-  }
-  if (currentRoom.treasure[1] > 0) {
+  } else if (currentRoom.treasure[1] > 0) {
     statusMessage.push("There are " + currentRoom.treasure[1] + " gold coins here.")
   }
   $(".location").hide();
@@ -74,8 +72,8 @@ Player.prototype.weaponCheck = function() {
     } else if (this.itemInventory[i] === "Stick") {
       if (haveKnife === false) {
         this.weaponDamage = 2;
-      weaponMessage.push("You have a heavy stick.");
       }
+      weaponMessage.push("You have a heavy stick.");
     }
   }
   return weaponMessage;
@@ -111,6 +109,9 @@ $(document).ready(function() {
     }
   });
   $("#button-interact").click(function() {
+    if (currentRoom.items.length === 0 && currentRoom.treasure[1] < 1) {
+      statusMessage.push("There is nothing here to pick up.");
+    }
     if (currentRoom.items.length > 0) {
       if (currentRoom.items[0] === "Key") {
         Gate.multidimention = true;
@@ -118,6 +119,7 @@ $(document).ready(function() {
       if (currentRoom.items[0] === "Potion") {
         playerOne.hitPoints += 5;
         currentRoom.items.shift(0,1);
+        statusMessage.push("You found a potion.");
         $("#interactable").html("<li>" + currentRoom.items + "</li>");
       } else {
         playerOne.itemInventory.push(currentRoom.items[0]);
@@ -132,8 +134,6 @@ $(document).ready(function() {
       statusMessage.push("You picked up the coins.");
       playerOne.goldCount += currentRoom.treasure[1];
       currentRoom.treasure[1] = 0;
-    } else {
-      statusMessage.push("There is nothing here to pick up.");
     }
   });
   $("#button-drop").click(function() {
@@ -168,12 +168,12 @@ function Directions(north, south, east, west, items, room, treasure, multidiment
   this.multidimention = multidimention;
 }
 var Forest = new Directions(false,false,true,false,["Stick"],"Forest",[false,0],false); //0,0,0 Forest
-var Gate = new Directions(false,false,true,true,["Potion"],"Gate",[true,0],true); //1,0,0 Gate
+var Gate = new Directions(false,false,true,true,[],"Gate",[true,0],true); //1,0,0 Gate
 var Cave = new Directions(true,false,false,true,[],"Cave",[true,0],false);  //2,0,0 Cave
 var ArchedRoom = new Directions(true,true,false,true,[],"ArchedRoom",[true,0],false); //2,1,0 ArchedRoom
 var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom",[true,0],false);  //1,1,0 GreatRoom
 var StairDown = new Directions(true,false, true,false,[],"StairDown",[true,0],false); //0,1,0 StairDown
-var Celler = new Directions(false,true,false,false,[],"Celler",[true,0],false); //0,2,0 Celler
+var Celler = new Directions(false,true,false,false,["Potion"],"Celler",[true,0],false); //0,2,0 Celler
 var Well = new Directions(false,true,false,false,["Key"],"Well",[true,0],false); //1,2,0 Well
 var Coffin = new Directions(false,true,false,false,["Knife"],"Coffin",[true,0],false); //2,2,0 Coffin
 var Forest2 = new Directions(true,false,true,false,[],"Forest2",[false,0],false); //3,0 Forest
