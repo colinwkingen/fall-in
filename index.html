@@ -9,209 +9,211 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
   </head>
-  <div class="container main_window">
-    <div class="row">
-      <div class="col-xs-3 main_columns">
-        <h3>Treasure</h3>
-        <p id="coin-counter"></p>
-        <h3>Hit Points</h3>
-        <p id="hitpoint-counter"></p>
-        <h3>Inventory Items</h3>
-        <ul id="inventory">
-        </ul>
-        <button type="button" class="btn btn-lg" id="button-drop">Drop</button>
-      </div>
-      <div class="col-xs-6 main_columns" id="main_output">
-        <div class="bank">
-          <div id="0-0" class="location">
-            <h2>The Forest</h2>
-            <p>
-              [0,0] You are deep in the forest, far from where you began. The trees are old here, and there is no wind.
-              In the light of the setting sun a pit can be seen. It is the only shelter, and passing it will leave you to
-              the bitter cold and hungry beasts of the wilderness.
-            </p>
-          </div>
-          <div id="1-0" class="location notHidden">
-            <h2>The Gate</h2>
-            <p>
-              [1,0] You have entered the pit. The height of the ceiling and slick stone will not allow you back out. This is a cave
-              made by nature, but lived in by something else. There is a rough floor. To the north, there is a heavy iron wrought gate with
-              the light of the outdoors beyond it. To the east, a natural archway bordered by stalagmites and pillars breaks the damp cave wall.
-            </p>
-          </div>
-          <div id="2-0" class="location notHidden">
-            <h2>Cave</h2>
-            <p>
-              [2,0] Deeper in the cave the floor becomes more worn. Torch smoke has stained the ceiling, and many of the caves stalagmites or stalagtites
-              are broken off and hold the melted remnants of candles. In the darkness patterns and symbols can be seen on the walls, drawn in soot
-              or something else. To the south lies a door of stone carved so perfectly, it seems neither man or nature could have been responsible.
-            </p>
-          </div>
-          <div id="0-1" class="location notHidden">
-            <h2>Stairs Downward</h2>
-            <p>
-              [0,1] This is a wooden staircase leading downward for some distance. There is a light mist almost obscuring veiw of the bottom.
-              Each stair is worn with age, and a few are broken in places. There are several lanterns at intervals hanging along the rail. The exit at
-              the top of the staircase lies to the east, and the exit at the bottom lies to the south.
+  <body>
+    <div class="container main_window">
+      <div class="row">
+        <div class="col-xs-3 main_columns">
+          <h3>Treasure</h3>
+          <p id="coin-counter"></p>
+          <h3>Hit Points</h3>
+          <p id="hitpoint-counter"></p>
+          <h3>Inventory Items</h3>
+          <ul id="inventory">
+          </ul>
+          <button type="button" class="btn btn-lg" id="button-drop">Drop</button>
+        </div>
+        <div class="col-xs-6 main_columns" id="main_output">
+          <div class="bank">
+            <div id="0-0" class="location">
+              <h2>The Forest</h2>
+              <p>
+                 You are deep in the forest, far from where you began. The trees are old here, and there is no wind.
+                In the light of the setting sun a pit can be seen. It is the only shelter, and passing it will leave you to
+                the bitter cold and hungry beasts of the wilderness.
+              </p>
+            </div>
+            <div id="1-0" class="location notHidden">
+              <h2>The Gate</h2>
+              <p>
+                 You have entered the pit. The height of the ceiling and slick stone will not allow you back out. This is a cave
+                made by nature, but lived in by something else. There is a rough floor. To the north, there is a heavy iron wrought gate with
+                the light of the outdoors beyond it. To the east, a natural archway bordered by stalagmites and pillars breaks the damp cave wall.
+              </p>
+            </div>
+            <div id="2-0" class="location notHidden">
+              <h2>Cave</h2>
+              <p>
+                 Deeper in the cave the floor becomes more worn. Torch smoke has stained the ceiling, and many of the caves stalagmites or stalagtites
+                are broken off and hold the melted remnants of candles. In the darkness patterns and symbols can be seen on the walls, drawn in soot
+                or something else. To the south lies a door of stone carved so perfectly, it seems neither man or nature could have been responsible.
+              </p>
+            </div>
+            <div id="0-1" class="location notHidden">
+              <h2>Stairs Downward</h2>
+              <p>
+                 This is a wooden staircase leading downward for some distance. There is a light mist almost obscuring veiw of the bottom.
+                Each stair is worn with age, and a few are broken in places. There are several lanterns at intervals hanging along the rail. The exit at
+                the top of the staircase lies to the east, and the exit at the bottom lies to the south.
 
-            </p>
-          </div>
-          <div id="1-1" class="location notHidden">
-            <h2>Greatroom</h2>
-            <p>
-              [1,1] This room is vast, and high. At least a dozen large heavy wooden tables surround an elevated table made of
-              a single slab of stone with a carved wooden throne at the end. Huge fireplaces lie to the north and south,
-              filled with long dead embers. A few tattered tapestries remain on the walls, their patterns unrecognizable.
-              a small exit with a wooden door lies to the west, and a large set of intricately carved wooden doors lie to the east.
-              A wooden door fitted with a lock lies to the north.
-            </p>
-          </div>
-          <div id="2-1" class="location notHidden">
-            <h2>Arched Room</h2>
-            <p>
-              [2,1] This is a round domed room of carved stone about the length and width of a house, and as high.
-              The surfaces are all made of fist sized stones that fit together tightly. The walls are carved
-              with the different phases of the moon. To the north is a door made of wood covered in cryptic
-              runes the height of two humans. To the west is a wide archway and short hall lined with long dead
-              torches and ending in a door.
-            </p>
-          </div>
-          <div id="0-2" class="location notHidden">
-            <h2>Cellar</h2>
-            <p>
-              [0,2] This is a large cellar filled wih wooden barrels and ceramic jars that sit on floor to ceiling rows of shelves.
-                It smells like mildew here, and a few small stagnant puddles are seen on the stone floor. The exit lies to the south.
-            </p>
-          </div>
-          <div id="1-2" class="location notHidden">
-            <h2>The Well</h2>
-            <p>
-              [1,2] This room is round, about twenty steps in diameter and has a well at the center with a chain pulley and large bucket. The air is very
-              damp here and moisture beads on the walls. Empty hooks for lamps are seen on two sides. The exit doorway lies to the south.
-            </p>
-          </div>
-          <div id="2-2" class="location notHidden">
-            <h2>The Crypt</h2>
-            <p>
-              [2,2] This is a room with a curved ceiling. It is shaped like a very wide hallway, and has the same stone structure as
-              the outside. A dark stone coffin sits at the northern end on a block of similar stone, carved in complicated patterns.
-              Piles of mouldering cloth, rusting metal and other materials line the walls. The air here is stale and dense.
-              You see some movment to the north, and are now face to face with a shambaling corpse. You must fight to survive!
-              The exit lies to the south.
-            </p>
-          </div>
-          <div id="3-0" class="location notHidden">
-            <h2>The Forest</h2>
-            <p>
-              [0,0,1] Forest2 You unlock the iron wrought gate and it opens, you see a dense forest. The forest canopy is so think that you can hardly make out if its night or day.
-              The trees stand tall, no creatures to be seen, and its unusually quiet. The paths you can see through the heavily wooded are to the north and east.
-            </p>
-          </div>
-          <div id="3-1" class="location notHidden">
-            <h2>The Forest</h2>
-            <p>
-              [0,0,1] Forest3 This woods is eerily similar to the woods you just came from. The trees seem to creak in an unsettling way. Still no creatures are seen nor heard.
-              The paths you see thought the heavily wooded area are to the south and east.
-            </p>
-          </div>
-          <div id="4-0" class="location notHidden">
-            <h2>The Forest</h2>
-            <p>
-              [0,0,1] Forest4 This part of the forest seems very small, about only 10 step in diameter. Being so close to the trees you see something etched in a tree.
-              It says "The code is the number of the beast..." The paths you can see through the dense forest is to the north, east, and south.
-            </p>
-          </div>
-          <div id="4-1" class="location notHidden">
-            <h2>The Forest</h2>
-            <p>
-              [0,0,1] Forest5 You enter into a foggy wooded area with thorny bushes. The little light that once came through the canopy of the forest is now nearly gone.
-               The paths you can see through the think fog is to the east, south, and west.
-            </p>
-          </div>
-          <div id="5-0" class="location notHidden">
-            <h2>The Forest</h2>
-            <p>
-              [0,0,1] Forest6 The forest is dark and still as you look around for any signs of life. Nothing stirs in this dark wood.
-              The paths you see lead to the north and west.
-            </p>
-          </div>
-          <div id="5-1" class="location notHidden">
-            <h2>The Forest</h2>
-            <p>
-              [0,0,1] Forest7 The woods are separating, and some light is starting to shine through. To the south you see the side of a mountain,
-              but you cannot reach it because of the steep terrain. The paths you see lead to the east, south, and west.
-            </p>
-          </div>
-          <div id="6-0" class="location notHidden">
-            <h2>The Fight Room</h2>
-            <p>
-              [0,0,1] Fight Room The room is large and glowing red. Giant pillers of bones surround a large evil creature in the center of the room.
-              It is a blood red bi-peidal beast that has curved horns and stands at the hight of two full grown men.
-              This is the Hell Baron. There is no going back... Fight or die!
+              </p>
+            </div>
+            <div id="1-1" class="location notHidden">
+              <h2>Greatroom</h2>
+              <p>
+                 This room is vast, and high. At least a dozen large heavy wooden tables surround an elevated table made of
+                a single slab of stone with a carved wooden throne at the end. Huge fireplaces lie to the north and south,
+                filled with long dead embers. A few tattered tapestries remain on the walls, their patterns unrecognizable.
+                a small exit with a wooden door lies to the west, and a large set of intricately carved wooden doors lie to the east.
+                A wooden door fitted with a lock lies to the north.
+              </p>
+            </div>
+            <div id="2-1" class="location notHidden">
+              <h2>Arched Room</h2>
+              <p>
+                 This is a round domed room of carved stone about the length and width of a house, and as high.
+                The surfaces are all made of fist sized stones that fit together tightly. The walls are carved
+                with the different phases of the moon. To the north is a door made of wood covered in cryptic
+                runes the height of two humans. To the west is a wide archway and short hall lined with long dead
+                torches and ending in a door.
+              </p>
+            </div>
+            <div id="0-2" class="location notHidden">
+              <h2>Cellar</h2>
+              <p>
+                 This is a large cellar filled wih wooden barrels and ceramic jars that sit on floor to ceiling rows of shelves.
+                  It smells like mildew here, and a few small stagnant puddles are seen on the stone floor. The exit lies to the south.
+              </p>
+            </div>
+            <div id="1-2" class="location notHidden">
+              <h2>The Well</h2>
+              <p>
+                 This room is round, about twenty steps in diameter and has a well at the center with a chain pulley and large bucket. The air is very
+                damp here and moisture beads on the walls. Empty hooks for lamps are seen on two sides. The exit doorway lies to the south.
+              </p>
+            </div>
+            <div id="2-2" class="location notHidden">
+              <h2>The Crypt</h2>
+              <p>
+                 This is a room with a curved ceiling. It is shaped like a very wide hallway, and has the same stone structure as
+                the outside. A dark stone coffin sits at the northern end on a block of similar stone, carved in complicated patterns.
+                Piles of mouldering cloth, rusting metal and other materials line the walls. The air here is stale and dense.
+                You see some movment to the north, and are now face to face with a shambaling corpse. You must fight to survive!
+                The exit lies to the south.
+              </p>
+            </div>
+            <div id="3-0" class="location notHidden">
+              <h2>The Forest</h2>
+              <p>
+                 Forest2 You unlock the iron wrought gate and it opens, you see a dense forest. The forest canopy is so think that you can hardly make out if its night or day.
+                The trees stand tall, no creatures to be seen, and its unusually quiet. The paths you can see through the heavily wooded are to the north and east.
+              </p>
+            </div>
+            <div id="3-1" class="location notHidden">
+              <h2>The Forest</h2>
+              <p>
+                 Forest3 This woods is eerily similar to the woods you just came from. The trees seem to creak in an unsettling way. Still no creatures are seen nor heard.
+                The paths you see thought the heavily wooded area are to the south and east.
+              </p>
+            </div>
+            <div id="4-0" class="location notHidden">
+              <h2>The Forest</h2>
+              <p>
+                 Forest4 This part of the forest seems very small, about only 10 step in diameter. Being so close to the trees you see something etched in a tree.
+                It says "The code is the number of the beast..." The paths you can see through the dense forest is to the north, east, and south.
+              </p>
+            </div>
+            <div id="4-1" class="location notHidden">
+              <h2>The Forest</h2>
+              <p>
+                 Forest5 You enter into a foggy wooded area with thorny bushes. The little light that once came through the canopy of the forest is now nearly gone.
+                 The paths you can see through the think fog is to the east, south, and west.
+              </p>
+            </div>
+            <div id="5-0" class="location notHidden">
+              <h2>The Forest</h2>
+              <p>
+                 Forest6 The forest is dark and still as you look around for any signs of life. Nothing stirs in this dark wood.
+                The paths you see lead to the north and west.
+              </p>
+            </div>
+            <div id="5-1" class="location notHidden">
+              <h2>The Forest</h2>
+              <p>
+                 Forest7 The woods are separating, and some light is starting to shine through. To the south you see the side of a mountain,
+                but you cannot reach it because of the steep terrain. The paths you see lead to the east, south, and west.
+              </p>
+            </div>
+            <div id="6-0" class="location notHidden">
+              <h2>The Fight Room</h2>
+              <p>
+                 Fight Room The room is large and glowing red. Giant pillers of bones surround a large evil creature in the center of the room.
+                It is a blood red bi-peidal beast that has curved horns and stands at the hight of two full grown men.
+                This is the Hell Baron. There is no going back... Fight or die!
 
-            </p>
+              </p>
+            </div>
+            <div id="6-1" class="location notHidden">
+              <h2>The Combo</h2>
+              <p>
+                [0,0,1] Combo Door As you enter to the north is two towering stone doors with runes an symbols you dont understand.
+                At the bottom on the left door you see a place to enter in a combination of numbers. It is 3 long and has numbers ranging from 0-9.
+                There are two paths you can take south trough the locked doors or west to the forest.
+              </p>
+            </div>
           </div>
-          <div id="6-1" class="location notHidden">
-            <h2>The Combo</h2>
-            <p>
-              [0,0,1] Combo Door As you enter to the north is two towering stone doors with runes an symbols you dont understand.
-              At the bottom on the left door you see a place to enter in a combination of numbers. It is 3 long and has numbers ranging from 0-9.
-              There are two paths you can take south trough the locked doors or west to the forest.
-            </p>
-          </div>
-        </div>
-        <div id="action-text">
+          <div id="action-text">
 
+          </div>
         </div>
-      </div>
-      <div class="col-xs-3 main_columns">
-        <h3>Room Contents</h3>
-        <ul id="interactable">
-        </ul>
-          <button type="button" class="btn btn-lg" id="button-interact">Pick Up</button>
-        <div id="roomLock">
-          <h3 id="gatelock">Gate Lock</h3>
-          <input id="comboInput" type="text" name="Combination" value=""></input>
-          <button type="button" class="btn btn-lg" id="button-unlock">Unlock The Gate</button>
+        <div class="col-xs-3 main_columns">
+          <h3>Room Contents</h3>
+          <ul id="interactable">
+          </ul>
+            <button type="button" class="btn btn-lg" id="button-interact">Pick Up</button>
+          <div id="roomLock">
+            <h3 id="gatelock">Gate Lock</h3>
+            <input id="comboInput" type="text" name="Combination" value=""></input>
+            <button type="button" class="btn btn-lg" id="button-unlock">Unlock The Gate</button>
+          </div>
+          <div id="combat">
+            <h3>Combat</h3>
+            <ul id="player-hp">
+            </ul>
+            <ul id="zombie-hp">
+            </ul>
+            <button type="button" class="btn btn-lg" id="button-combat">Fight</button>
+          </div>
+          <div id="boss">
+            <h3>Boss Fight</h3>
+            <ul id="player-hp">
+            </ul>
+            <ul id="baron-hp">
+            </ul>
+            <button type="button" class="btn btn-lg" id="button-boss">Fight</button>
+          </div>
         </div>
-        <div id="combat">
-          <h3>Combat</h3>
-          <ul id="player-hp">
-          </ul>
-          <ul id="zombie-hp">
-          </ul>
-          <button type="button" class="btn btn-lg" id="button-combat">Fight</button>
-        </div>
-        <div id="boss">
-          <h3>Boss Fight</h3>
-          <ul id="player-hp">
-          </ul>
-          <ul id="baron-hp">
-          </ul>
-          <button type="button" class="btn btn-lg" id="button-boss">Fight</button>
-        </div>
-      </div>
-      <nav class="navbar navbar-inverse navbar-fixed-bottom">
-        <div class="container">
-          <div class="btn-group btn-group-justified" role="group">
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-lg" id="button-north">North</button>
-            </div>
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-lg" id="button-south">South</button>
-            </div>
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-lg" id="button-east">East</button>
-            </div>
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-lg" id="button-west">West</button>
-            </div>
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-lg" id="button-multidimention">Spooky</button>
+        <nav class="navbar navbar-inverse navbar-fixed-bottom">
+          <div class="container">
+            <div class="btn-group btn-group-justified" role="group">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-lg" id="button-north">North</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-lg" id="button-south">South</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-lg" id="button-east">East</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-lg" id="button-west">West</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-lg" id="button-multidimention">Spooky</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </nav>
-  </div>
+      </nav>
+    </div>
+  </body>
 </html>

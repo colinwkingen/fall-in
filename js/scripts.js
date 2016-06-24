@@ -98,15 +98,12 @@ baronOne = new Baron();
 zombieOne = new Zombie();
 var combat = function() {
   result = Math.floor((Math.random() * 20) + 1);
-  if (result >= 10) {
+  if (result >= 10 && currentRoom.room === "Coffin") {
     zombieOne.zombieHitPoints -= playerOne.weaponDamage;
     playerOne.hitPoints -= zombieOne.zombieDamage;
+  } else if (result >= 10 && currentRoom.room === "Attack") {
     baronOne.baronHitPoints -= playerOne.weaponDamage;
     playerOne.hitPoints -= baronOne.baronDamage;
-  } else {
-    playerOne.hitPoints += 0;
-    zombieOne.zombieHitPoints += 0;
-    baronOne.baronHitPoints += 0;
   }
 }
 function Baron() {
