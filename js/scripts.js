@@ -9,7 +9,7 @@ function Directions(north, south, east, west, items, room, treasure, multidiment
   this.multidimention = multidimention;
 }
 var Forest = new Directions(false,false,true,false,["Stick"],"Forest",[false,0],false); //0,0,0 Forest
-var Gate = new Directions(false,false,true,true,["Key"],"Gate",[true,0],true); //1,0,0 Gate
+var Gate = new Directions(false,false,true,true,[],"Gate",[true,0],true); //1,0,0 Gate
 var Cave = new Directions(true,false,false,true,[],"Cave",[true,0],false);  //2,0,0 Cave
 var ArchedRoom = new Directions(true,true,false,true,[],"ArchedRoom",[true,0],false); //2,1,0 ArchedRoom
 var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom",[true,0],false);  //1,1,0 GreatRoom
@@ -254,6 +254,7 @@ $(document).ready(function() {
       $("#combat").hide();
     }else if (playerOne.hitPoints <= 0){
       statusMessage.push("You fought with courage, but died.");
+      location.reload();
       $("#combat").hide();
     }
     if (zombieOne.zombieHitPoints > 0) {
