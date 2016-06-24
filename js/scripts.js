@@ -8,8 +8,9 @@ function Directions(north, south, east, west, items, room, treasure, multidiment
   this.treasure = treasure;
   this.multidimention = multidimention;
 }
-var Forest = new Directions(false,false,true,false,["Key"],"Forest",[false,0],false); //0,0,0 Forest
-var Gate = new Directions(false,false,true,true,[],"Gate",[true,0],false); //1,0,0 Gate
+
+var Forest = new Directions(false,false,true,false,["Stick"],"Forest",[false,0],false); //0,0,0 Forest
+var Gate = new Directions(false,false,true,true,["Key"],"Gate",[true,0],true); //1,0,0 Gate
 var Cave = new Directions(true,false,false,true,[],"Cave",[true,0],false);  //2,0,0 Cave
 var ArchedRoom = new Directions(true,true,false,true,[],"ArchedRoom",[true,0],false); //2,1,0 ArchedRoom
 var GreatRoom = new Directions(true,false,true,true,[],"GreatRoom",[true,0],false);  //1,1,0 GreatRoom
@@ -150,21 +151,28 @@ Player.prototype.weaponCheck = function() {
   return weaponMessage.join(" ");
 }
 $(document).ready(function(){
+  var comboReturn = [];
   $("#button-unlock").click(function(event) {
     var comboLock = parseInt($("#comboInput").val());
     console.log(comboLock);
     if (comboLock > 666) {
+      comboReturn.push("Guess Lower");
     } else if (comboLock < 666) {
+      comboReturn.push("Guess Higher");
     } else if (comboLock === 666) {
+      comboReturn.push("Go fight the Monster!");
       currentRoom.south = true;
       currentRoom.west = true;
     } else {
       alert("Don't break my game.");
     }
+    alert(comboReturn.pop());
     event.preventDefault();
   })
 })
 $(document).ready(function() {
+  $("#coin-counter").text("You have " + playerOne.goldCount + " gold coins.");
+  $("#hitpoint-counter").text("You have " + playerOne.hitPoints + " hit points.")
   $("#interactable").html("<li>" + currentRoom.items + "</li>");
   visibleLocation(currentLocation);
   var statusMessage = []
@@ -244,6 +252,7 @@ $(document).ready(function() {
     statusMessage.push(playerOne.weaponCheck());
     $("#action-text").html(statusMessage.join(" "));
     $("#coin-counter").text("You have " + playerOne.goldCount + " gold coins.");
+    $("#hitpoint-counter").text("You have " + playerOne.hitPoints + " hit point.")
     statusMessage = [];
   });
   $("#button-combat").click(function() {
