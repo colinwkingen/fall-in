@@ -260,13 +260,14 @@ $(document).ready(function() {
     $("#player-hp").html("<li> Current Hit Points:" + playerOne.hitPoints + "</li>"); (zombieOne.zombieHitPoints <= 5);
     $("#zombie-hp").html("<li> Current Zombie Hit Points:" + zombieOne.zombieHitPoints + "</li>");
     if (currentLocation === "Coffin") {
+     $("#combat").show();
     }
     if (zombieOne.zombieHitPoints <= 0){
       statusMessage.push("You have defeated the horrible zombie.");
-      $("#combat").hide();
+      // $("#combat").hide();
     } else if (playerOne.hitPoints <= 0){
       statusMessage.push("You fought with courage, but died.");
-      $("#combat").hide();
+      // $("#combat").hide();
     }
     if (zombieOne.zombieHitPoints > 0) {
       $("#button-south").hide();
