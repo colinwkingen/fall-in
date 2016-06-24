@@ -87,14 +87,8 @@ var visibleLocation = function(inputLocation) {
   } else {
     $("#combat").hide();
   }
-  if (currentRoom.room === "Attack" && zombieTwo.zombieHitPoints2 > 0 ){
-    $("#combat2").show();
-  } else {
-    $("#combat2").hide();
-  }
   return statusMessage;
 }
-zombieTwo = new zombieTwo();
 zombieOne = new Zombie();
 var combat = function() {
   result = Math.floor((Math.random() * 20) + 1);
@@ -105,20 +99,6 @@ var combat = function() {
     playerOne.hitPoints += 0;
     zombieOne.zombieHitPoints += 0;
   }
-}
-var combat2 = function() {
-  result = Math.floor((Math.random() * 20) + 1);
-  if (result >= 10) {
-    zombieTwo.zombieHitPoints2 -= playerOne.weaponDamage;
-    playerOne.hitPoints -= zombieTwo.zombieDamage2;
-  } else {
-    playerOne.hitPoints += 0;
-    zombieTwo.zombieHitPoints2 += 0;
-  }
-}
-function zombieTwo() {
-  this.zombieHitPoints2 = 20;
-  this.zombieDamage2 = 1;
 }
 function Zombie() {
   this.zombieHitPoints = 5;
@@ -259,15 +239,12 @@ $(document).ready(function() {
     var result = combat();
     $("#player-hp").html("<li> Current Hit Points:" + playerOne.hitPoints + "</li>"); (zombieOne.zombieHitPoints <= 5);
     $("#zombie-hp").html("<li> Current Zombie Hit Points:" + zombieOne.zombieHitPoints + "</li>");
-    if (currentLocation === "Coffin") {
-     $("#combat").show();
-    }
     if (zombieOne.zombieHitPoints <= 0){
       statusMessage.push("You have defeated the horrible zombie.");
-      // $("#combat").hide();
+      $("#combat").hide();
     } else if (playerOne.hitPoints <= 0){
       statusMessage.push("You fought with courage, but died.");
-      // $("#combat").hide();
+      $("#combat").hide();
     }
     if (zombieOne.zombieHitPoints > 0) {
       $("#button-south").hide();
@@ -276,22 +253,4 @@ $(document).ready(function() {
       $("#button-south").show();
     }
   });
-  $("#button-combat2").click(function() {
-    var result = combat2();
-    $("#player-hp2").html("<li> Current Hit Points:" + playerOne.hitPoints + "</li>"); (zombieTwo.zombieHitPoints2 <= 20);
-    $("#zombie-hp2").html("<li> Current Zombie Hit Points:" + zombieTwo.zombieHitPoints2 + "</li>");
-    if (zombieTwo.zombieHitPoints2 <= 0){
-      statusMessage.push("You have defeated the horrible zombie.");
-      $("#combat2").hide();
-    } else if (playerOne.hitPoints <= 0){
-      statusMessage.push("You fought with courage, but died.");
-      $("#combat2").hide();
-    }
-    if (zombieTwo.zombieHitPoints2 > 0) {
-      $("#button-south").hide();
-    } else {
-      $("#action-text2").html(statusMessage.join(" "));
-      $("#button-south").show();
-    }
-  })
 });
