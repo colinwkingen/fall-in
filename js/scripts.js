@@ -87,18 +87,31 @@ var visibleLocation = function(inputLocation) {
   } else {
     $("#combat").hide();
   }
+  if (currentRoom.room === "Attack" && baronOne.baronHitPoints > 0 ){
+    $("#boss").show();
+  } else {
+    $("#boss").hide();
+  }
   return statusMessage;
 }
+baronOne = new Baron();
 zombieOne = new Zombie();
 var combat = function() {
   result = Math.floor((Math.random() * 20) + 1);
   if (result >= 10) {
     zombieOne.zombieHitPoints -= playerOne.weaponDamage;
     playerOne.hitPoints -= zombieOne.zombieDamage;
+    baronOne.baronHitPoints -= playerOne.weaponDamage;
+    playerOne.hitPoints -= baronOne.baronDamage;
   } else {
     playerOne.hitPoints += 0;
     zombieOne.zombieHitPoints += 0;
+    baronOne.baronHitPoints += 0;
   }
+}
+function Baron() {
+  this.baronHitPoints = 20;
+  this.baronDamage = 1;
 }
 function Zombie() {
   this.zombieHitPoints = 5;
@@ -242,7 +255,7 @@ $(document).ready(function() {
     if (zombieOne.zombieHitPoints <= 0){
       statusMessage.push("You have defeated the horrible zombie.");
       $("#combat").hide();
-    } else if (playerOne.hitPoints <= 0){
+    }else if (playerOne.hitPoints <= 0){
       statusMessage.push("You fought with courage, but died.");
       $("#combat").hide();
     }
@@ -251,6 +264,18 @@ $(document).ready(function() {
     } else {
       $("#action-text").html(statusMessage.join(" "));
       $("#button-south").show();
+    }
+  });
+  $("#button-boss").click(function() {
+    var result = combat();
+    $("#player-hp").html("<li> Current Hit Points:" + playerOne.hitPoints + "</li>"); (baronOne.baronHitPoints <= 20);
+    $("#baron-hp").html("<li> Current Hell Baron Hit Points" + baronOne.baronHitPoints + "</li>");
+    if (baronOne.baronHitPoints <= 0){
+      statusMessage.push("You have defeated the Hell Baron!");
+      $("#boss").hide();
+    } else if (playerOne.hitPoints <= 0){
+      statusMessage.push("You fought with courage, but died.");
+      $("#boss").hide();
     }
   });
 });
