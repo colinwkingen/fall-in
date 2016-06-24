@@ -83,6 +83,7 @@ var visibleLocation = function(inputLocation) {
     $("#roomLock").hide();
   }
   if (currentRoom.room === "Coffin" && zombieOne.zombieHitPoints > 0 || currentRoom.room === "Attack" && zombieTwo.zombieHitPoints > 0){
+    $("#zombie-hp").empty();
     $("#combat").show();
   } else {
     $("#combat").hide();
@@ -254,7 +255,8 @@ $(document).ready(function() {
         statusMessage.push("You have defeated the horrible zombie.");
         $("#combat").hide();
       } else if (playerOne.hitPoints <= 0){
-        statusMessage.push("You fought with courage, but died.");
+        alert("You fought with courage, but died.");
+        location.reload();
         $("#combat").hide();
       }
       if (zombieTwo.zombieHitPoints > 0) {
