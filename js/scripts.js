@@ -8,6 +8,7 @@ function Directions(north, south, east, west, items, room, treasure, multidiment
   this.treasure = treasure;
   this.multidimention = multidimention;
 }
+
 var Forest = new Directions(false,false,true,false,["Stick"],"Forest",[false,0],false); //0,0,0 Forest
 var Gate = new Directions(false,false,true,true,["Key"],"Gate",[true,0],true); //1,0,0 Gate
 var Cave = new Directions(true,false,false,true,[],"Cave",[true,0],false);  //2,0,0 Cave
@@ -24,7 +25,7 @@ var Forest5 = new Directions(false,true,true,true,["Potion"],"Forest5",[false,0]
 var Forest6 = new Directions(true,false,false,true,[],"Forest6",[false,0],false); //5,0 Forest
 var Forest7 = new Directions(false,true,true,true,[],"Forest7",[false,0],false); //5,1 Forest
 var Attack = new Directions(true,false,false,false,[],"Attack",[false,0],false); //6,0 Attack
-var Combo = new Directions(false,true,false,false,[],"Combo",[false,0],false); //6,1 Combo
+var Combo = new Directions(false,false,false,false,[],"Combo",[false,0],false); //6,1 Combo
 var currentLocation = [0,0];
 var playerOne = new Player();
 var arrayOfDirections = [
@@ -82,26 +83,41 @@ var visibleLocation = function(inputLocation) {
   } else {
     $("#roomLock").hide();
   }
-  if (currentRoom.room === "Coffin" && zombieOne.zombieHitPoints > 0 ){
+  if (currentRoom.room === "Coffin" && zombieOne.zombieHitPoints > 0 || currentRoom.room === "Attack" && zombieTwo.zombieHitPoints > 0){
+    $("#zombie-hp").empty();
     $("#combat").show();
   } else {
     $("#combat").hide();
   }
-  return statusMessage;
+  // return statusMessage;
 }
-zombieOne = new Zombie();
+zombieOne = new Zombie(5);
+zombieTwo = new Zombie(50);
 var combat = function() {
   result = Math.floor((Math.random() * 20) + 1);
-  if (result >= 10) {
-    zombieOne.zombieHitPoints -= playerOne.weaponDamage;
-    playerOne.hitPoints -= zombieOne.zombieDamage;
+  if (currentRoom.room === "Attack") {
+    if (result >= 10) {
+      zombieTwo.zombieHitPoints -= playerOne.weaponDamage;
+      playerOne.hitPoints -= zombieOne.zombieDamage;
+    } else {
+      playerOne.hitPoints += 0;
+      zombieTwo.zombieHitPoints += 0;
+    }
   } else {
-    playerOne.hitPoints += 0;
-    zombieOne.zombieHitPoints += 0;
+    {
+      if (result >= 10) {
+        zombieOne.zombieHitPoints -= playerOne.weaponDamage;
+        playerOne.hitPoints -= zombieOne.zombieDamage;
+      } else {
+        playerOne.hitPoints += 0;
+        zombieOne.zombieHitPoints += 0;
+      }
+    }
   }
+
 }
-function Zombie() {
-  this.zombieHitPoints = 5;
+function Zombie(zombieHP) {
+  this.zombieHitPoints = zombieHP;
   this.zombieDamage = 1;
 }
 function Player() {
@@ -216,6 +232,10 @@ $(document).ready(function() {
   });
   $("#button-drop").click(function() {
     if (playerOne.itemInventory.length > 0 ) {
+      if (playerOne.itemInventory[0] === "Key") {
+        playerOne.hasKey = false;
+        Gate.multidimention = false;
+      }
       currentRoom.items.push(playerOne.itemInventory[0]);
       playerOne.itemInventory.shift();
       $("#inventory").html("<li>" + playerOne.itemInventory + "</li>");
@@ -236,21 +256,42 @@ $(document).ready(function() {
     statusMessage = [];
   });
   $("#button-combat").click(function() {
-    var result = combat();
-    $("#player-hp").html("<li> Current Hit Points:" + playerOne.hitPoints + "</li>"); (zombieOne.zombieHitPoints <= 5);
-    $("#zombie-hp").html("<li> Current Zombie Hit Points:" + zombieOne.zombieHitPoints + "</li>");
-    if (zombieOne.zombieHitPoints <= 0){
-      statusMessage.push("You have defeated the horrible zombie.");
-      $("#combat").hide();
-    } else if (playerOne.hitPoints <= 0){
-      statusMessage.push("You fought with courage, but died.");
-      $("#combat").hide();
-    }
-    if (zombieOne.zombieHitPoints > 0) {
-      $("#button-south").hide();
+    if (currentRoom.room === "Attack")  {
+      var result = combat();
+      $("#player-hp").html("<li> Current Hit Points:" + playerOne.hitPoints + "</li>"); (zombieTwo.zombieHitPoints <= 5);
+      $("#zombie-hp").html("<li> Current Zombie Hit Points:" + zombieTwo.zombieHitPoints + "</li>");
+      if (zombieTwo.zombieHitPoints <= 0){
+        statusMessage.push("You have defeated the horrible zombie.");
+        $("#combat").hide();
+      } else if (playerOne.hitPoints <= 0){
+        alert("You fought with courage, but died.");
+        location.reload();
+        $("#combat").hide();
+      }
+      if (zombieTwo.zombieHitPoints > 0) {
+        $("#button-south").hide();
+      } else {
+        $("#action-text").html(statusMessage.join(" "));
+        $("#button-south").show();
+      }
     } else {
-      $("#action-text").html(statusMessage.join(" "));
-      $("#button-south").show();
+      var result = combat();
+      $("#player-hp").html("<li> Current Hit Points:" + playerOne.hitPoints + "</li>"); (zombieOne.zombieHitPoints <= 5);
+      $("#zombie-hp").html("<li> Current Zombie Hit Points:" + zombieOne.zombieHitPoints + "</li>");
+      if (zombieOne.zombieHitPoints <= 0){
+        statusMessage.push("You have defeated the horrible zombie.");
+        $("#combat").hide();
+      } else if (playerOne.hitPoints <= 0){
+        statusMessage.push("You fought with courage, but died.");
+        $("#combat").hide();
+      }
+      if (zombieOne.zombieHitPoints > 0) {
+        $("#button-south").hide();
+      } else {
+        $("#action-text").html(statusMessage.join(" "));
+        $("#button-south").show();
+      }
     }
+
   });
-});
+})
